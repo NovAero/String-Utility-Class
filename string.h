@@ -12,28 +12,27 @@ public:
 	~String();
 
 public:
-	//size_t Length() const;
-	//char& CharacterAt(size_t _index);
-	//const char& CharacterAt(size_t _index) const;
+	size_t len() const;
+	char& charAt(size_t _index);
+	const char& charAt(size_t _index) const;
 
-	//bool EqualTo(const String& _other) const;
+	bool isEqual(const String& _other) const;
+	
+	String& suf(const String& _str);
+	String& pre(const String& _str);
 
-	//
-	//String& Append(const String& _str);
-	//String& Prepend(const String& _str);
+	const char* cstr() const;
 
-	//const char* CStr() const;
+	String& toLow(char* input);
+	String& toUp(char* input);
 
-	//String& ToLower(char* input);
-	//String& ToUpper(char* input);
+	size_t find(const String& _str);
+	size_t find(size_t _startindex, const String& _str);
 
-	//size_t Find(const String& _str);
-	//size_t Find(size_t _startIndex, const String& _str);
+	String& replace(const String& _find, const String& _replace);
 
-	//String& Replace(const String& _find, const String& _replace);
-
-	//String& ReadFromConsole();
-	//String& WriteToConsole();
+	String& input();
+	String& print();
 
 public:
 	bool operator==(const String& _other);

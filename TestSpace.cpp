@@ -3,7 +3,8 @@
 
 int main() {
 
-	String string = "balls";
+	String emptyString;
 
-	String string2 = string;
+	String string1 = "01234567asdasdasd";
+
 }
