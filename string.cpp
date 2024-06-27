@@ -20,16 +20,29 @@ String::String(const char* _str)
 	for (int i = 0; i < strlen(_str);i++) {
 
 		data[i] = _str[i];
-		std::cout << data[i];
 
 	}
+
+	*iterPtr = length;
+	std::cout << length << std::endl;
+
 }
 
 
 String::String(const String& _other)
 {
-	
+	int length = _other.iterations;
+
+	data = new char[( length + 1 )];
+
+	for (char i = 0; i < length; i++) {
+		
+		data[i] = _other[i];
+
+	}
+	data[length] = '\0';
 }
+
 
 String::~String()
 {

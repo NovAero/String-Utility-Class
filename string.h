@@ -45,6 +45,12 @@ public:
 
 private:
 
+	//Dynamic const length for Copy functions
+	const int iterations = 0;
+	int* iterPtr = const_cast<int*>(&iterations);
+
+
+	//String variable contents
 	char* data;
 
 };
