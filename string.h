@@ -1,5 +1,6 @@
 #pragma once
 
+
 class String
 {
 public:
@@ -17,13 +18,14 @@ public:
 
 	bool EqualTo(const String& _other) const;
 
+	
 	String& Append(const String& _str);
 	String& Prepend(const String& _str);
 
 	const char* CStr() const;
 
-	String& ToLower();
-	String& ToUpper();
+	String& ToLower(char* input);
+	String& ToUpper(char* input);
 
 	size_t Find(const String& _str);
 	size_t Find(size_t _startIndex, const String& _str);
@@ -43,7 +45,7 @@ public:
 	const char& operator[](size_t _index) const;
 
 private:
-	/*
-	* Put your internal data structures and members here
-	*/
+
+	char data[];
+
 };
