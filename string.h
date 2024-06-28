@@ -34,9 +34,6 @@ public: // Overrides //
 	char& operator[](size_t index);
 	const char& operator[](size_t index) const;
 
-	String operator<<(String& trg);
-	String operator>>(String& trg);
-
 public: // Functions //
 
 	const char* GetData() const;
@@ -74,7 +71,7 @@ private:
 	const int capBnds[2] = {65,90};
 
 	//Clamp for lowercase letters in ASCII
-	const int lwrBnds[2] = {97,172};
+	const int lwrBnds[2] = {97,122};
 
 	//Case change +- offset
 	const int asciiOffset = 32;

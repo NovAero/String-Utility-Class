@@ -4,10 +4,11 @@ using namespace std;
 
 int main() {
 
-	String emptyString;
+	String string3 = "balls";
 
-	String string1 = "THAS";
-	String string2 = "that";
+	String string1 = "this";
+	String string2 = "this";
 
 	std::cout << (string1 < string2);
+
 }

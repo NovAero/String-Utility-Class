@@ -63,6 +63,8 @@ bool String::operator!=(const String& other)
 
 bool String::operator<(const String& str)
 {
+	//NOTE returns true if LHS is first alphabetically, not case sensitive
+
 	bool orderFound = false;
 	int index = 0;
 
@@ -120,16 +122,6 @@ char& String::operator[](size_t index)
 const char& String::operator[](size_t index) const
 {
 	return data[index];
-}
-
-String String::operator<<(String& trg)
-{
-	return Suffix(trg);
-}
-
-String String::operator>>(String& trg)
-{
-	return Prefix(trg);
 }
 
 
@@ -262,6 +254,8 @@ const char* String::Cstr() const
 
 String& String::ToLower()
 {
+	//Uses ASCII values to clamp ranges for casechanges
+
 	String rtn = data;
 
 	for (int i = 0; i < rtn.len(); ++i) {
@@ -275,6 +269,8 @@ String& String::ToLower()
 
 String& String::ToUpper()
 {
+	//Uses ASCII values to clamp ranges for casechanges
+
 	String rtn = data;
 
 	for (int i = 0; i < rtn.len(); ++i) {
@@ -285,6 +281,19 @@ String& String::ToUpper()
 
 	return rtn;
 }
+
+//size_t String::Find(const String& str)
+//{
+//	int l = str.len();
+//
+//	
+//
+//}
+//
+//size_t String::Find(size_t _startindex, const String& str)
+//{
+//	return size_t();
+//}
 
 String& String::Print() const
 {
