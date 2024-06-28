@@ -47,9 +47,11 @@ String::~String()
 
 }
 
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 								  // Overrides //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 bool String::operator==(const String& other)
 {
@@ -216,7 +218,7 @@ String& String::Suffix(const String& str)
 	if (data[newStrSize - 1] != '\0') {
 		data[newStrSize] = '\0';
 	}
-	return tmp;
+	return *this;
 }
 
 String& String::Prefix(const String& str)
@@ -244,7 +246,7 @@ String& String::Prefix(const String& str)
 		data[newStrSize] = '\0';
 	}
 
-	return tmp;
+	return *this;
 }
 
 const char* String::Cstr() const
@@ -256,31 +258,33 @@ String& String::ToLower()
 {
 	//Uses ASCII values to clamp ranges for casechanges
 
-	String rtn = data;
-
-	for (int i = 0; i < rtn.len(); ++i) {
+	for (int i = 0; i < *GetData(); ++i) {
 		if (data[i] >= capBnds[0] && data[i] <= capBnds[1]) {
 			data[i] += asciiOffset;
 		}
 	}
-
-	return rtn;
+	return *this;
 }
 
 String& String::ToUpper()
 {
 	//Uses ASCII values to clamp ranges for casechanges
 
-	String rtn = data;
-
-	for (int i = 0; i < rtn.len(); ++i) {
+	for (int i = 0; i < *GetData(); ++i) {
 		if (data[i] >= lwrBnds[0] && data[i] <= lwrBnds[1]) {
 			data[i] -= asciiOffset;
 		}
 	}
 
-	return rtn;
+	return *this;
 }
+
+//size_t String::Find(const String& str)
+//{
+//	String 
+//
+//	return size_t();
+//}
 
 //size_t String::Find(const String& str)
 //{
@@ -295,19 +299,29 @@ String& String::ToUpper()
 //	return size_t();
 //}
 
-String& String::Print() const
+String& String::Input()
 {
-	String rtn;
-	rtn = data;
+	char input[32];
+
+	std::cin.getline(input, 32, '\n');
+
+	data = new char[strlen(input) + 1];
+
+	SetData(input);
+
+	return *this;
+}
+
+String& String::Print() 
+{
 
 	std::cout << data;
 
-	return rtn;
+	return *this;
 }
 
-String& String::Print(char modifier) const
+String& String::Print(char modifier)
 {
-	String rtn = data;
 	char mod = modifier;
 
 	switch (mod) {
@@ -330,6 +344,6 @@ String& String::Print(char modifier) const
 
 	default:
 		std::cout << data;
-		return rtn;
+		return *this;
 	} 
 }

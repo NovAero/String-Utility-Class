@@ -22,9 +22,6 @@ public: // Overrides //
 
 	bool operator<(const String& str);
 
-	bool operator>=(const String& str);
-	bool operator<=(const String& str);
-
 	String& operator+(const String& str);
 	String& operator+=(const String& str);
 
@@ -57,13 +54,13 @@ public: // Functions //
 	String& ToUpper();
 
 	size_t Find(const String& str);
-	size_t Find(size_t _startindex, const String& str);
+	size_t Find(size_t startindex, const String& str);
 
-	String& Replace(const String& _find, const String& _replace);
+	String& Replace(const String& find, const String& replace);
 
 	String& Input();
-	String& Print() const;
-	String& Print(char modifier) const;
+	String& Print();
+	String& Print(char modifier);
 
 private:
 
