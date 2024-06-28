@@ -6,12 +6,8 @@ int main() {
 
 	String emptyString;
 
-	String string1 = "0123456789";
-	String string2 = string1;
-	
+	String string1 = "THAS";
+	String string2 = "that";
 
-	string2.print('n');
-
-	string1.print();
-
+	std::cout << (string1 < string2);
 }

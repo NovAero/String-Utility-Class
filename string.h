@@ -2,7 +2,7 @@
 
 class String
 {
-public:
+public: // Constructors // 
 
 	String();
 
@@ -15,18 +15,18 @@ public:
 
 	~String();
 
-public:
+public: // Overrides //
+
 	bool operator==(const String& other);
 	bool operator!=(const String& other);
 
-	bool operator>(const String& str);
 	bool operator<(const String& str);
 
 	bool operator>=(const String& str);
 	bool operator<=(const String& str);
 
 	String& operator+(const String& str);
-	String& operator-(const String& str);
+	String& operator+=(const String& str);
 
 	String& operator=(const char* str);
 	String& operator=(const String& str);
@@ -37,37 +37,47 @@ public:
 	String operator<<(String& trg);
 	String operator>>(String& trg);
 
-public:
-	const char* getData() const;
+public: // Functions //
 
-	void setData(char toSet);
-	void setData(const char* toSet);
+	const char* GetData() const;
+
+	void SetData(char toSet);
+	void SetData(const char* toSet);
 
 	size_t len() const;
 	
-	char& charAt(size_t index);
-	const char& charAt(size_t index) const;
+	char& CharAt(size_t index);
+	const char& CharAt(size_t index) const;
 
-	bool isEqual(const String& other) const;
+	bool IsEqual(const String& other) const;
 	
-	String& suffix(const String& str);
-	String& prefix(const String& str);
+	String& Suffix(const String& str);
+	String& Prefix(const String& str);
 
-	const char* cstr() const;
+	const char* Cstr() const;
 
-	String& toLower(char* input);
-	String& toUper(char* input);
+	String& ToLower();
+	String& ToUpper();
 
-	size_t find(const String& str);
-	size_t find(size_t _startindex, const String& str);
+	size_t Find(const String& str);
+	size_t Find(size_t _startindex, const String& str);
 
-	String& replace(const String& _find, const String& _replace);
+	String& Replace(const String& _find, const String& _replace);
 
-	String& input();
-	String& print();
-	String& print(char modifier);
+	String& Input();
+	String& Print() const;
+	String& Print(char modifier) const;
 
 private:
+
+	//Clamp for capital letters in ASCII
+	const int capBnds[2] = {65,90};
+
+	//Clamp for lowercase letters in ASCII
+	const int lwrBnds[2] = {97,172};
+
+	//Case change +- offset
+	const int asciiOffset = 32;
 
 	//String variable contents
 	char* data;

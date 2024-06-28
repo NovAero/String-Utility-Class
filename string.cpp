@@ -2,7 +2,9 @@
 #include <iostream>
 #include <cstring>
 
-//Constructors/Deconstructors
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+						 // Constructors / Deconstructor //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 String::String()
 {
@@ -14,27 +16,27 @@ String::String()
 
 String::String(char ch) 
 {
-	setData(ch);
+	SetData(ch);
 }
 
 String::String(const char* str)
 {	
 
-	setData(str);
+	SetData(str);
 
 }
 
 String::String(String& copy)
 {
 
-	setData(copy.getData());
+	SetData(copy.GetData());
 
 }
 
 String::String(const String& copy)
 {
 	
-	setData(const_cast<char*>(copy.getData()));
+	SetData(const_cast<char*>(copy.GetData()));
 
 }
 
@@ -45,29 +47,68 @@ String::~String()
 
 }
 
-//Overrides
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+								  // Overrides //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 bool String::operator==(const String& other)
 {
-	return isEqual(other);
+	return IsEqual(other);
 }
 
 bool String::operator!=(const String& other)
 {
-	return (data != other.getData());
+	return (data != other.GetData());
 }
 
-String& String::operator=(const char* str) 
+bool String::operator<(const String& str)
+{
+	bool orderFound = false;
+	int index = 0;
+
+	String lhs = data;
+	String rhs = str;
+
+	rhs.ToLower();
+	lhs.ToLower();
+
+	while (orderFound == false) {
+		if (lhs[index] > rhs[index]) {
+			orderFound = true;
+			return false;
+
+		}
+		else if (lhs[index] < rhs[index]) {
+			orderFound = true;
+			return true;
+		}
+		else {
+			index++;
+		}
+	}
+}
+
+String& String::operator+(const String& str)
+{
+	return Suffix(str);
+}
+
+String& String::operator+=(const String& str)
+{
+	return Suffix(str);
+}
+
+String& String::operator=(const char* str)
 {
 	String tmp;
-	tmp.setData(str);
+	tmp.SetData(str);
 	return tmp;
 }
 
 String& String::operator=(const String& str)
 {
 	String tmp;
-	tmp.setData(const_cast<char*>(str.getData()));
+	tmp.SetData(const_cast<char*>(str.GetData()));
 	return tmp;
 }
 
@@ -81,21 +122,35 @@ const char& String::operator[](size_t index) const
 	return data[index];
 }
 
-// Functions
+String String::operator<<(String& trg)
+{
+	return Suffix(trg);
+}
 
-const char* String::getData() const
+String String::operator>>(String& trg)
+{
+	return Prefix(trg);
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  // Functions //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+const char* String::GetData() const
 {
 	return data;
 }
 
-void String::setData(char toSet)
+void String::SetData(char toSet)
 {
 	data = new char[2];
 	data[0] = toSet;
 	data[1] = '\0';
 }
 
-void String::setData(const char* toSet)
+void String::SetData(const char* toSet)
 {
 	int l = strlen(toSet);
 
@@ -118,17 +173,17 @@ size_t String::len() const
 
 }
 
-char& String::charAt(size_t index)
+char& String::CharAt(size_t index)
 {	
 	return data[index];
 }
 
-const char& String::charAt(size_t index) const
+const char& String::CharAt(size_t index) const
 {
 	return data[index];
 }
 
-bool String::isEqual(const String& other) const
+bool String::IsEqual(const String& other) const
 {
 	int a = strlen(data);
 	int b = other.len();
@@ -147,7 +202,91 @@ bool String::isEqual(const String& other) const
 	}	return true;
 }
 
-String& String::print()
+String& String::Suffix(const String& str)
+{
+	int strSize = str.len();
+	int dataSize = strlen(data);
+	int newStrSize = dataSize + strSize;
+
+	String tmp = new char[dataSize + 1];
+	tmp.SetData(data);
+
+	data = new char[newStrSize + 1];
+
+	for (int i = 0; i < dataSize; ++i) {
+		data[i] = tmp[i];
+
+	}
+	for (int j = 0; j < strSize; ++j) {
+		data[dataSize+j] = str[j];
+
+	}
+	if (data[newStrSize - 1] != '\0') {
+		data[newStrSize] = '\0';
+	}
+	return tmp;
+}
+
+String& String::Prefix(const String& str)
+{
+	int strSize = str.len();
+	int dataSize = strlen(data);
+	int newStrSize = dataSize + strSize;
+
+	String tmp = new char[dataSize + 1];
+	tmp.SetData(data);
+
+	data = new char[newStrSize + 1];
+
+	for (int i = 0; i < strSize; ++i) {
+		data[i] = str[i];
+
+	}
+	for (int j = 0; j < dataSize; ++j) {
+
+		data[strSize+j] = tmp[j];
+
+	}
+
+	if (data[newStrSize - 1] != '\0') {
+		data[newStrSize] = '\0';
+	}
+
+	return tmp;
+}
+
+const char* String::Cstr() const
+{
+	return GetData();
+}
+
+String& String::ToLower()
+{
+	String rtn = data;
+
+	for (int i = 0; i < rtn.len(); ++i) {
+		if (data[i] >= capBnds[0] && data[i] <= capBnds[1]) {
+			data[i] += asciiOffset;
+		}
+	}
+
+	return rtn;
+}
+
+String& String::ToUpper()
+{
+	String rtn = data;
+
+	for (int i = 0; i < rtn.len(); ++i) {
+		if (data[i] >= lwrBnds[0] && data[i] <= lwrBnds[1]) {
+			data[i] -= asciiOffset;
+		}
+	}
+
+	return rtn;
+}
+
+String& String::Print() const
 {
 	String rtn;
 	rtn = data;
@@ -157,7 +296,7 @@ String& String::print()
 	return rtn;
 }
 
-String& String::print(char modifier)
+String& String::Print(char modifier) const
 {
 	String rtn = data;
 	char mod = modifier;
@@ -172,10 +311,14 @@ String& String::print(char modifier)
 		std::cout << data << "\t";
 		break;
 
-	case 's':
+	case 'p':
+		std::cout << " " << data;
+		break;
+
+	case's':
 		std::cout << data << " ";
 		break;
-	
+
 	default:
 		std::cout << data;
 		return rtn;
