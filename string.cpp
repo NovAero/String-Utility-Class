@@ -11,38 +11,31 @@ String::String()
 
 }
 
+String::String(char _char) 
+{
+	setData(_char);
+}
+
 String::String(const char* _str)
 {	
 
-	int length = strlen(_str);
-	data = new char[(length) + 1];
-	
-	for (int i = 0; i < strlen(_str);i++) {
-
-		data[i] = _str[i];
-
-	}
-
-	*iterPtr = length;
-	std::cout << length << std::endl;
+	setData(_str);
 
 }
 
-
-String::String(const String& _other)
+String::String(String& _copy)
 {
-	int length = _other.iterations;
 
-	data = new char[( length + 1 )];
+	setData(_copy.getData());
 
-	for (char i = 0; i < length; i++) {
-		
-		data[i] = _other[i];
-
-	}
-	data[length] = '\0';
 }
 
+String::String(const String& _copy)
+{
+	
+	setData(const_cast<char*>(_copy.getData()));
+
+}
 
 String::~String()
 {
@@ -51,80 +44,70 @@ String::~String()
 
 }
 
-//Functions
+// Functions
 
+const char* String::getData() const
+{
+	return data;
+}
+
+void String::setData(char toSet)
+{
+	data = new char[2];
+	data[0] = toSet;
+	data[1] = '\0';
+}
+
+void String::setData(const char* toSet)
+{
+	int l = strlen(toSet);
+
+	data = new char[l];	
+
+	for (int i = 0; i < l; i++) {
+
+		data[i] = toSet[i];
+
+	}
+	if (data[l - 1] != '\0') {
+		data[l] = '\0';
+	}
+}
 
 size_t String::len() const
 {
-	int length = 0;
-
-	for (char i = 0; data[i] != '\0'; i++) {
-		length++;
-	}
-
-	return length;
+	return strlen(data);
 }
 
 char& String::charAt(size_t _index)
 {	
-	char* ptr = data;
-
-	if (_index < 0 || _index > strlen(data)) {
-		return ptr['\0'];
-
-	} else {
-
-		for (int i = 0; i < _index; i++) {
-
-			if (i == _index) {
-			
-				return ptr[_index];
-			
-			}
-		}
-
-	}
+	return data[_index];
 }
 
 const char& String::charAt(size_t _index) const
 {
-	const char* ptr = data;
-
-	if (_index < 0 || _index > strlen(data)) {
-		return ptr['\0'];
-	}
-	else {
-		for (int i = 0; i < _index; i++) {
-			if (i == _index) {
-				return ptr[_index];
-			}
-		}
-	}
+	return data[_index];
 }
 
 bool String::isEqual(const String& _other) const
 {
-	for (int i = 0; i < sizeof(_other); i++) {
-		if (data[i] == _other[i]) {
-			continue;
-		} else {
-			return 0;
-		}
-		return 1;
-	}
+	return false;
 }
 
 
 //Overrides
 
+bool String::operator!=(const String& _other)
+{
+	return !(data == _other.getData());
+}
+
 char& String::operator[](size_t _index)
 {
-	char* ptr = data;
-	return ptr[_index];
+	return data[_index];
 }
 
 const char& String::operator[](size_t _index) const
 {
-	const char* ptr = data;
-	return ptr[_index];
+	return data[_index];
 }

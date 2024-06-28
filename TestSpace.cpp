@@ -14,4 +14,6 @@ int main() {
 	}
 
 	std::cout << std::endl << string2.len();
+
+	std::cout << std::endl << string2.charAt(2);
 }
