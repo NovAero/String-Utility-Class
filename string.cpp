@@ -45,6 +45,42 @@ String::~String()
 
 }
 
+//Overrides
+
+bool String::operator==(const String& other)
+{
+	return isEqual(other);
+}
+
+bool String::operator!=(const String& other)
+{
+	return (data != other.getData());
+}
+
+String& String::operator=(const char* str) 
+{
+	String tmp;
+	tmp.setData(str);
+	return tmp;
+}
+
+String& String::operator=(const String& str)
+{
+	String tmp;
+	tmp.setData(const_cast<char*>(str.getData()));
+	return tmp;
+}
+
+char& String::operator[](size_t index)
+{
+	return data[index];
+}
+
+const char& String::operator[](size_t index) const
+{
+	return data[index];
+}
+
 // Functions
 
 const char* String::getData() const
@@ -111,33 +147,37 @@ bool String::isEqual(const String& other) const
 	}	return true;
 }
 
-
-//Overrides
-
-
-bool String::operator==(const String& other)
+String& String::print()
 {
-	return isEqual(other);
+	String rtn;
+	rtn = data;
+
+	std::cout << data;
+
+	return rtn;
 }
 
-bool String::operator!=(const String& other)
+String& String::print(char modifier)
 {
-	return (data != other.getData());
-}
+	String rtn = data;
+	char mod = modifier;
 
-String& String::operator=(const String& str)
-{
-	String temp;
-	temp.setData(const_cast<char*>(str.getData()));
-	return temp;
-}
+	switch (mod) {
 
-char& String::operator[](size_t index)
-{
-	return data[index];
-}
+	case 'n':
+		std::cout << data << std::endl;
+		break;
 
-const char& String::operator[](size_t index) const
-{
-	return data[index];
+	case 't':
+		std::cout << data << "\t";
+		break;
+
+	case 's':
+		std::cout << data << " ";
+		break;
+	
+	default:
+		std::cout << data;
+		return rtn;
+	} 
 }

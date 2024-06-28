@@ -5,8 +5,11 @@ class String
 public:
 
 	String();
+
 	String(char ch);
+	
 	String(const char* str);
+	
 	String(String& copy);
 	String(const String& copy);
 
@@ -16,13 +19,23 @@ public:
 	bool operator==(const String& other);
 	bool operator!=(const String& other);
 
+	bool operator>(const String& str);
+	bool operator<(const String& str);
+
+	bool operator>=(const String& str);
+	bool operator<=(const String& str);
 
 	String& operator+(const String& str);
+	String& operator-(const String& str);
 
+	String& operator=(const char* str);
 	String& operator=(const String& str);
 
 	char& operator[](size_t index);
 	const char& operator[](size_t index) const;
+
+	String operator<<(String& trg);
+	String operator>>(String& trg);
 
 public:
 	const char* getData() const;
@@ -52,6 +65,7 @@ public:
 
 	String& input();
 	String& print();
+	String& print(char modifier);
 
 private:
 
