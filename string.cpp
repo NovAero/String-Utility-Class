@@ -6,34 +6,35 @@
 
 String::String()
 {
+
 	data = new char[1];
 	data[0] = '\0';
 
 }
 
-String::String(char _char) 
+String::String(char ch) 
 {
-	setData(_char);
+	setData(ch);
 }
 
-String::String(const char* _str)
+String::String(const char* str)
 {	
 
-	setData(_str);
+	setData(str);
 
 }
 
-String::String(String& _copy)
+String::String(String& copy)
 {
 
-	setData(_copy.getData());
+	setData(copy.getData());
 
 }
 
-String::String(const String& _copy)
+String::String(const String& copy)
 {
 	
-	setData(const_cast<char*>(_copy.getData()));
+	setData(const_cast<char*>(copy.getData()));
 
 }
 
@@ -62,7 +63,7 @@ void String::setData(const char* toSet)
 {
 	int l = strlen(toSet);
 
-	data = new char[l];	
+	data = new char[l + 1];
 
 	for (int i = 0; i < l; i++) {
 
@@ -76,38 +77,67 @@ void String::setData(const char* toSet)
 
 size_t String::len() const
 {
+
 	return strlen(data);
+
 }
 
-char& String::charAt(size_t _index)
+char& String::charAt(size_t index)
 {	
-	return data[_index];
+	return data[index];
 }
 
-const char& String::charAt(size_t _index) const
+const char& String::charAt(size_t index) const
 {
-	return data[_index];
+	return data[index];
 }
 
-bool String::isEqual(const String& _other) const
+bool String::isEqual(const String& other) const
 {
-	return false;
+	int a = strlen(data);
+	int b = other.len();
+
+	if (a != b) {
+		return false;
+	}
+
+	for (int i = 0; i < a; ++i) {
+		if (data[i] == other[i]) {
+			continue;
+		}
+		else {
+			return false;
+		}
+	}	return true;
 }
 
 
 //Overrides
 
-bool String::operator!=(const String& _other)
+
+bool String::operator==(const String& other)
 {
-	return !(data == _other.getData());
+	return isEqual(other);
 }
 
-char& String::operator[](size_t _index)
+bool String::operator!=(const String& other)
 {
-	return data[_index];
+	return (data != other.getData());
 }
 
-const char& String::operator[](size_t _index) const
+String& String::operator=(const String& str)
 {
-	return data[_index];
+	String temp;
+	temp.setData(const_cast<char*>(str.getData()));
+	return temp;
+}
+
+char& String::operator[](size_t index)
+{
+	return data[index];
+}
+
+const char& String::operator[](size_t index) const
+{
+	return data[index];
 }

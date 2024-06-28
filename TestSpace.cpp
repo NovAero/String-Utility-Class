@@ -1,19 +1,14 @@
 #include <iostream>
 #include "string.h"
+using namespace std;
 
 int main() {
 
 	String emptyString;
 
-	String string1 = "01234567asdasdasd";
-	String& ptr = string1;
-	String string2 = ptr;
+	String string1 = "0123456789";
+	String string2 = string1;
 
-	for (int i = 0; i < string2.len(); i++) {
-		std::cout << string2[i];
-	}
+	cout << (string1 == string2);
 
-	std::cout << std::endl << string2.len();
-
-	std::cout << std::endl << string2.charAt(2);
-}
+}	
