@@ -360,23 +360,20 @@ String& String::Replace(const String& find, const String& replace)
 				temp[i] = data[k + leftSize + sizeToRemove];
 				i++;
 			}
-
 		}
 		if (temp[-1] != '\0') {
 			temp[(leftSize + rightSize) + sizeToAllocate] = '\0';
 		}
-
 		SetData(temp);
-
 		return *this;
 	}
 }
 
 String& String::Input()
 {
-	char input[32];
+	char input[256];
 
-	cin.getline(input, 32, '\n');
+	cin.getline(input, 256, '\n');
 
 	data = new char[strlen(input) + 1];
 
