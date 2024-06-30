@@ -1,6 +1,11 @@
 #include "string.h"
 #include <iostream>
 #include <cstring>
+#include <map>
+#include <algorithm>
+
+
+using namespace std;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 						 // Constructors / Deconstructor //
@@ -279,31 +284,99 @@ String& String::ToUpper()
 	return *this;
 }
 
-//size_t String::Find(const String& str)
-//{
-//	String 
-//
-//	return size_t();
-//}
+size_t String::Find(const String& str)
+{
+	String phrase = str;
+	String text = data;
 
-//size_t String::Find(const String& str)
-//{
-//	int l = str.len();
-//
-//	
-//
-//}
-//
-//size_t String::Find(size_t _startindex, const String& str)
-//{
-//	return size_t();
-//}
+	int x = 0;
+	int i = 0;
+
+	while (i <= text.len()) {
+		if (text[i] == phrase[x]) {
+			x++;
+			i++;
+
+			if (x == phrase.len())
+				return i - x;
+			continue;
+		}
+		i -= x - 1;
+		x = 0;
+	}
+	return -1;
+}
+
+size_t String::Find(size_t startindex, const String& str)
+{
+	String phrase = str;
+	String text = data;
+
+	int x = 0;
+	int i = startindex;
+
+	while (i <= text.len()) {
+		if (text[i] == phrase[x]) {
+			x++;
+			i++;
+
+			if (x == phrase.len())
+				return i - x;
+			continue;
+		}
+		i -= x - 1;
+		x = 0;
+	}
+	return -1;
+}
+
+String& String::Replace(const String& find, const String& replace)
+{
+	int sizeToAllocate = replace.len();
+	int sizeToRemove = find.len();
+	int diff = sizeToAllocate - sizeToRemove;
+
+	int leftSize = Find(find);
+	int rightSize = strlen(data) - leftSize - sizeToRemove;
+
+	int i = 0;
+
+	char* temp = new char[(leftSize + rightSize) + diff + 1];
+	
+	if (leftSize == -1) {
+		return *this;
+	}
+	else {
+		while (i <= leftSize + rightSize + diff) {
+
+			for (i; i < leftSize; i++) {
+				temp[i] = data[i];
+			}
+			for (int j = 0; j < sizeToAllocate; ++j) {
+				temp[i] = replace[j];
+				i++;
+			}
+			for (int k = 0; k < rightSize; k++) {
+				temp[i] = data[k + leftSize + sizeToRemove];
+				i++;
+			}
+
+		}
+		if (temp[-1] != '\0') {
+			temp[(leftSize + rightSize) + sizeToAllocate] = '\0';
+		}
+
+		SetData(temp);
+
+		return *this;
+	}
+}
 
 String& String::Input()
 {
 	char input[32];
 
-	std::cin.getline(input, 32, '\n');
+	cin.getline(input, 32, '\n');
 
 	data = new char[strlen(input) + 1];
 
@@ -315,7 +388,7 @@ String& String::Input()
 String& String::Print() 
 {
 
-	std::cout << data;
+	cout << data;
 
 	return *this;
 }
@@ -327,23 +400,23 @@ String& String::Print(char modifier)
 	switch (mod) {
 
 	case 'n':
-		std::cout << data << std::endl;
+		cout << data << endl;
 		break;
 
 	case 't':
-		std::cout << data << "\t";
+		cout << data << "\t";
 		break;
 
 	case 'p':
-		std::cout << " " << data;
+		cout << " " << data;
 		break;
 
 	case's':
-		std::cout << data << " ";
+		cout << data << " ";
 		break;
 
 	default:
-		std::cout << data;
+		cout << data;
 		return *this;
 	} 
 }

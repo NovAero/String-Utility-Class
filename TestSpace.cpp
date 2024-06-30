@@ -4,21 +4,12 @@ using namespace std;
 
 int main() {
 
-	String string3 = "balls ";
-
-	String string1 = "THIS";
-	String string2 = "this ";
-
-	string1.ToLower();
-
+	String string1 = "bird dragon fish unicorn fox";
+	String string2 = "";
+	
 	string1.Print('n');
 
-	string2.ToUpper();
+	string1.Replace("fish", string2);
 
-	string2.Print('n');
-
-	String string4 = string4.Input();
-
-	string4.Print();
-
+	string1.Print();
 }
