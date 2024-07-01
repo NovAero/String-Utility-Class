@@ -4,13 +4,12 @@ using namespace std;
 
 int main() {
 
-	String string1 = "bird dragon fish unicorn fox";
-	String string2 = string2.Input();
-	
+	String string1 = "that this those this";
+	String string2 = "this";
+	String string3 = "deeznuts";
+
 	string1.Print('n');
-
-	string1.Replace("fish", string2);
-
-	string1.Print();
+	string1.Replace(string2, string3, true);
+	string1.Print('n');
 
 }

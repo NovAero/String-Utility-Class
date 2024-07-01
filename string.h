@@ -1,13 +1,16 @@
 #pragma once
 #include<map>
 
+#define SIZE_T_MAX ((size_t)-1)
+#define MAX_CHAR_LENGTH 256
+
 class String
 {
 public: // Constructors // 
 
 	String();
 
-	String(char ch);
+	String(const char ch);
 	
 	String(const char* str);
 	
@@ -29,8 +32,8 @@ public: // Overrides //
 	String& operator=(const char* str);
 	String& operator=(const String& str);
 
-	char& operator[](size_t index);
-	const char& operator[](size_t index) const;
+	char& operator[](const size_t index);
+	const char& operator[](const size_t index) const;
 
 public: // Functions //
 
@@ -46,9 +49,12 @@ public: // Functions //
 
 	bool IsEqual(const String& other) const;
 	
+	//NOTE: Suffix and Prefix are Append and Prepend respectively,
+	// renamed for my own readability
 	String& Suffix(const String& str);
 	String& Prefix(const String& str);
 
+	//Minor redundancy, Cstr() is == to GetData() which is used for readability
 	const char* Cstr() const;
 
 	String& ToLower();
@@ -58,6 +64,7 @@ public: // Functions //
 	size_t Find(size_t startindex, const String& str);
 
 	String& Replace(const String& find, const String& replace);
+	String& Replace(const String& find, const String& replace, bool replaceAll);
 
 	String& Input();
 	String& Print();

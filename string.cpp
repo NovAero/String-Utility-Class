@@ -1,15 +1,17 @@
 #include "string.h"
+#include <stdexcept>
 #include <iostream>
 #include <cstring>
 #include <map>
 #include <algorithm>
 
-
 using namespace std;
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 						 // Constructors / Deconstructor //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 String::String()
 {
@@ -19,7 +21,7 @@ String::String()
 
 }
 
-String::String(char ch) 
+String::String(const char ch) 
 {
 	SetData(ch);
 }
@@ -82,52 +84,59 @@ bool String::operator<(const String& str)
 	lhs.ToLower();
 
 	while (orderFound == false) {
-		if (lhs[index] > rhs[index]) {
-			orderFound = true;
-			return false;
-
-		}
-		else if (lhs[index] < rhs[index]) {
+		if (lhs[index] < rhs[index]) {
 			orderFound = true;
 			return true;
 		}
 		else {
 			index++;
 		}
+		orderFound = true;
+		return true;
 	}
+	return false;
 }
 
 String& String::operator+(const String& str)
 {
+	//Adds RHS to LHS
 	return Suffix(str);
 }
 
 String& String::operator+=(const String& str)
 {
+	//Same as a = a + b; just different syntax
 	return Suffix(str);
 }
 
 String& String::operator=(const char* str)
 {
-	String tmp;
-	tmp.SetData(str);
-	return tmp;
+	//Runs SetData() to set data (LHS) to str (RHS)
+	SetData(str);
+	return *this;
 }
 
 String& String::operator=(const String& str)
 {
-	String tmp;
-	tmp.SetData(const_cast<char*>(str.GetData()));
-	return tmp;
+	//Runs SetData() to set data (LHS) to str (RHS) with
+	//a const cast since it takes a reference instead of a char*
+	SetData(const_cast<char*>(str.GetData()));
+	return *this;
 }
 
-char& String::operator[](size_t index)
+char& String::operator[](const size_t index)
 {
+	//Throw error if index is out of range
+	if (index >= len() || index < 0) { throw out_of_range("Out of range"); }
+	//Otherwise returns contents of data at index
 	return data[index];
 }
 
-const char& String::operator[](size_t index) const
+const char& String::operator[](const size_t index) const
 {
+	//Throw error if index is out of range
+	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
+	//Otherwise returns contents of data at index
 	return data[index];
 }
 
@@ -139,11 +148,13 @@ const char& String::operator[](size_t index) const
 
 const char* String::GetData() const
 {
+	//returns the contents of data
 	return data;
 }
 
 void String::SetData(char toSet)
 {
+	//creates new data size to set it to one char and a '\0'
 	data = new char[2];
 	data[0] = toSet;
 	data[1] = '\0';
@@ -151,15 +162,19 @@ void String::SetData(char toSet)
 
 void String::SetData(const char* toSet)
 {
+	//length of new string excluding '\0'
 	int l = strlen(toSet);
 
+	//sets data to be a new size of l + 1 to allow for '\0' at the end
 	data = new char[l + 1];
 
+	//For loop to set data to the new string
 	for (int i = 0; i < l; i++) {
 
 		data[i] = toSet[i];
 
 	}
+	//if there is no '\0' at the end. sets last item in array to '\0' to avoid overflow
 	if (data[l - 1] != '\0') {
 		data[l] = '\0';
 	}
@@ -167,67 +182,89 @@ void String::SetData(const char* toSet)
 
 size_t String::len() const
 {
-
+	//strlen returns the length of data, excluding the '\0' character
 	return strlen(data);
 
 }
 
 char& String::CharAt(size_t index)
-{	
+{
+	//Throw error if index is out of range
+	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
+	//If it's in range return the contents of data at index
 	return data[index];
 }
 
 const char& String::CharAt(size_t index) const
 {
+	//same as previous, just a const
+	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
 	return data[index];
 }
 
 bool String::IsEqual(const String& other) const
 {
-	int a = strlen(data);
+	//lenght of data (LHS)
+	int a = len();
+	//length of other (RHS)
 	int b = other.len();
 
-	if (a != b) {
+	if (a != b) { // If the size of a and b are different, exits
 		return false;
 	}
 
-	for (int i = 0; i < a; ++i) {
+	for (int i = 0; i < a; ++i) { //for each matching char at [i], continue
 		if (data[i] == other[i]) {
 			continue;
 		}
-		else {
+		else { //if the char at [i] of both arrays it returns false
 			return false;
 		}
+		//if the for loop finishes, returns true
 	}	return true;
 }
 
-String& String::Suffix(const String& str)
-{
-	int strSize = str.len();
-	int dataSize = strlen(data);
-	int newStrSize = dataSize + strSize;
+String& String::Suffix(const String& str) 
+{	//Suffix is Append() function renamed for personal preference
 
+	int strSize = str.len(); //Size of string to suffix to data
+	int dataSize = strlen(data); //Size of data
+	int newStrSize = dataSize + strSize; //Total size of chars (excl '\0')
+
+	//Set new tmp object to size of data + 1 (for '\0'), then sets the contents of tmp
 	String tmp = new char[dataSize + 1];
 	tmp.SetData(data);
 
+	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')
+	delete[] data;
 	data = new char[newStrSize + 1];
 
-	for (int i = 0; i < dataSize; ++i) {
-		data[i] = tmp[i];
+	int j = 0;
+	int k = dataSize;
+
+	//For loop sets data to be string before setting its data to be tmp at the end
+	for (int i = 0; i < max(strSize, dataSize); ++i) {
+		if (j < dataSize) {
+			data[j] = tmp[i];
+			j++;
+		}
+		if (k < newStrSize) {
+			data[k] = str[i];
+			k++;
+		}
 
 	}
-	for (int j = 0; j < strSize; ++j) {
-		data[dataSize+j] = str[j];
-
-	}
-	if (data[newStrSize - 1] != '\0') {
+	//For loop to set data at size greater than original string to new suffix contents
+	
+	//Checks if data has overrrun, and sets the end of data to be '\0'
+	if (this[newStrSize] != '\0') {
 		data[newStrSize] = '\0';
 	}
 	return *this;
 }
 
-String& String::Prefix(const String& str)
-{
+String& String::Prefix(const String& str) //Renamed from Prepend()
+{	// Similar to Suffix, just adds the string before data
 	int strSize = str.len();
 	int dataSize = strlen(data);
 	int newStrSize = dataSize + strSize;
@@ -235,19 +272,27 @@ String& String::Prefix(const String& str)
 	String tmp = new char[dataSize + 1];
 	tmp.SetData(data);
 
+	delete[] data;
 	data = new char[newStrSize + 1];
 
-	for (int i = 0; i < strSize; ++i) {
-		data[i] = str[i];
+	//Iterators for simultaneous writing of data[index]
+	int j = 0; //Writes to left
+	int k = dataSize; //Writes to right
 
+	//For loop sets data to be string before setting its data to be tmp at the end
+	for (int i = 0; i <= max(strSize,dataSize); ++i) {
+		if(j < strSize){
+			data[j] = str[i];
+			j++;
+		}
+		if (k < newStrSize) {
+			data[k] = tmp[i];
+			k++;
+		}
+		
 	}
-	for (int j = 0; j < dataSize; ++j) {
-
-		data[strSize+j] = tmp[j];
-
-	}
-
-	if (data[newStrSize - 1] != '\0') {
+	//Checks if data has overrrun, and sets the end of data to be '\0'
+	if (this[newStrSize] != '\0') {
 		data[newStrSize] = '\0';
 	}
 
@@ -256,12 +301,12 @@ String& String::Prefix(const String& str)
 
 const char* String::Cstr() const
 {
+	//Same as GetData() so it just calls GetData()
 	return GetData();
 }
 
 String& String::ToLower()
-{
-	//Uses ASCII values to clamp ranges for casechanges
+{//Uses ASCII values to clamp ranges for casechanges - see private variables in string.h
 
 	for (int i = 0; i < *GetData(); ++i) {
 		if (data[i] >= capBnds[0] && data[i] <= capBnds[1]) {
@@ -272,8 +317,7 @@ String& String::ToLower()
 }
 
 String& String::ToUpper()
-{
-	//Uses ASCII values to clamp ranges for casechanges
+{//Uses ASCII values to clamp ranges for casechanges - see private variables in string.h
 
 	for (int i = 0; i < *GetData(); ++i) {
 		if (data[i] >= lwrBnds[0] && data[i] <= lwrBnds[1]) {
@@ -286,107 +330,119 @@ String& String::ToUpper()
 
 size_t String::Find(const String& str)
 {
-	String phrase = str;
-	String text = data;
-
-	int x = 0;
-	int i = 0;
-
-	while (i <= text.len()) {
-		if (text[i] == phrase[x]) {
-			x++;
-			i++;
-
-			if (x == phrase.len())
-				return i - x;
-			continue;
-		}
-		i -= x - 1;
-		x = 0;
-	}
-	return -1;
+	//Runs Find() at index 0, removed identical lines of code
+	return Find(0, str);
 }
 
 size_t String::Find(size_t startindex, const String& str)
 {
+	//sets temp objects for readability and debug
 	String phrase = str;
 	String text = data;
 
-	int x = 0;
-	int i = startindex;
+	int x = 0; //Iterator
+	int i = startindex; //Index in data to start from
 
-	while (i <= text.len()) {
-		if (text[i] == phrase[x]) {
+	while (i < text.len()) { //Runs until word is found || until end of text, excluding last char
+		if (text[i] == phrase[x]) { //If char is the same, check next
 			x++;
 			i++;
 
-			if (x == phrase.len())
-				return i - x;
+			if (x == phrase.len()) { //If x == phrase,len(), the string has been found and can exit
+				return i - x; // i-x is index of phrase
+			}
 			continue;
-		}
+		} // Else //
 		i -= x - 1;
 		x = 0;
 	}
-	return -1;
+	return SIZE_T_MAX; // == -1;
 }
 
 String& String::Replace(const String& find, const String& replace)
-{
-	int sizeToAllocate = replace.len();
-	int sizeToRemove = find.len();
-	int diff = sizeToAllocate - sizeToRemove;
+{	//Replaces first instance only by default
+	return Replace(find, replace, false);
+}
 
-	int leftSize = Find(find);
-	int rightSize = strlen(data) - leftSize - sizeToRemove;
+String& String::Replace(const String& find, const String& replace, bool replaceAll)
+{	//Replaces string to find with replace, if replaceAll == false, replace only the first instance;
 
-	int i = 0;
-
-	char* temp = new char[(leftSize + rightSize) + diff + 1];
+	int sizeReplace = replace.len(); //Size of substring replace
+	int sizeFind = find.len(); //Size of substring find
+	int diff = sizeReplace - sizeFind; //Difference between replace - find
 	
-	if (leftSize == -1) {
+	int newArraySize = strlen(data) + diff; //size of data + or - diff for new array sizing
+	int leftSize = Find(find); //Finds index of substring 
+	int rightSize = strlen(data) - leftSize - sizeFind; //Right hand side of the string exluding the text to be removed
+	
+	String temp = data; //temp for new size of string after replace
+
+	delete[] data;
+
+	data = new char[newArraySize + 1];
+
+	if (leftSize == SIZE_T_MAX) { //If find returns -1, aborts since -1 == not found
 		return *this;
 	}
 	else {
-		while (i <= leftSize + rightSize + diff) {
+		int i = 0; //Iterator
 
-			for (i; i < leftSize; i++) {
-				temp[i] = data[i];
+		int l = 0; //left iterator
+		int m = leftSize; //middle iterator (substring replace)
+		int rtmp = leftSize + sizeFind; //right iterator 
+		int r = leftSize + sizeReplace; //right iterator
+
+		while (i < max(sizeReplace, max(leftSize,rightSize))) { //while i is less than the biggest size to write
+			if (l < leftSize) { //and while i < left chunk of string
+				data[i] = temp[i];
+				l++;
 			}
-			for (int j = 0; j < sizeToAllocate; ++j) {
-				temp[i] = replace[j];
-				i++;
+			if (m < leftSize + sizeReplace && replace[i] != '\0') { //m is middle of data
+				data[m] = replace[i];
+				m++;
 			}
-			for (int k = 0; k < rightSize; k++) {
-				temp[i] = data[k + leftSize + sizeToRemove];
-				i++;
+			if (r < newArraySize) { //puts the right side of data back together 
+				data[r] = temp[rtmp];
+				r++;
+				rtmp++;
 			}
+			i++;
 		}
-		if (temp[-1] != '\0') {
-			temp[(leftSize + rightSize) + sizeToAllocate] = '\0';
+
+		if (data[newArraySize] != '\0') { //if last char of data != '\0', sets to that to avoid mem leaks 
+			data[newArraySize] = '\0';
 		}
-		SetData(temp);
-		return *this;
+	}
+	if (replaceAll == true) { //If replaceAll is set to false, it only replaces the first instance
+		if (Find(find) != SIZE_T_MAX) { //Checks if the substring find exists in next instance
+			Replace(find, replace, true); //Recursive Replace();
+		}
+		else {
+			return *this;
+		}
 	}
 }
 
 String& String::Input()
 {
-	char input[256];
+	//creates char array to read from console max number of chars
+	//in input is 255 + '\0'
+	char input[MAX_CHAR_LENGTH];
 
-	cin.getline(input, 256, '\n');
+	//Input reads line from console, taking a max of 255 chars
+	cin.getline(input, MAX_CHAR_LENGTH - 1, '\n');
 
+	//Makes data fit the new string, and strlen(input) wont make it a 256 length,
+	//only length of the input + 1 for '\0'
 	data = new char[strlen(input) + 1];
-
 	SetData(input);
 
 	return *this;
 }
 
-String& String::Print() 
+String& String::Print() //Just prints the data taking no modifier
 {
-
 	cout << data;
-
 	return *this;
 }
 
@@ -396,23 +452,28 @@ String& String::Print(char modifier)
 
 	switch (mod) {
 
-	case 'n':
+	case 'n': //returns data with a new line after
 		cout << data << endl;
+		return *this;
 		break;
 
-	case 't':
+	case 't': //returns data with a tab after it
 		cout << data << "\t";
+		return *this;
 		break;
 
-	case 'p':
+	case 'p': //returns data with a space before (p stands for prefix)
 		cout << " " << data;
+		return *this;
 		break;
 
-	case's':
+	case's': //returns data with a space after (s stands for suffix)
 		cout << data << " ";
+		return *this;
 		break;
 
-	default:
+		
+	default: //just returns data with no mods if the modifier param != valid mod
 		cout << data;
 		return *this;
 	} 
