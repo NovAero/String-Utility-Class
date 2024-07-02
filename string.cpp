@@ -1,4 +1,4 @@
-#include "string.h"
+#include "String.h"
 #include <stdexcept>
 #include <iostream>
 #include <cstring>
@@ -62,38 +62,40 @@ String::~String()
 
 bool String::operator==(const String& other)
 {
+	//Returns IsEqual() (see function below)
 	return IsEqual(other);
 }
 
 bool String::operator!=(const String& other)
 {
+	//Returns if the two string are NOT the same contents
 	return (data != other.GetData());
 }
 
 bool String::operator<(const String& str)
 {
 	//NOTE returns true if LHS is first alphabetically, not case sensitive
-
 	bool orderFound = false;
 	int index = 0;
 
 	String lhs = data;
 	String rhs = str;
 
+	//Sets both to lowercase since A == 65 and a == 97 in ASCII table
 	rhs.ToLower();
 	lhs.ToLower();
 
 	while (orderFound == false) {
-		if (lhs[index] < rhs[index]) {
+		if (lhs[index] < rhs[index]) { //if LHS is smaller (earlier) than RHS
 			orderFound = true;
-			return true;
+			return true; //LHS comes first in alphabet
 		}
-		else {
+		else { //Else they are the same, check next index
 			index++;
-		}
-		orderFound = true;
-		return true;
-	}
+		} //Else it is greater (later) in the alphabet
+		orderFound = true;	
+		return true; // 
+	} //If all indexes are checked returns false since they're the same order in alphabet
 	return false;
 }
 
@@ -277,7 +279,7 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 
 	//Iterators for simultaneous writing of data[index]
 	int j = 0; //Writes to left
-	int k = dataSize; //Writes to right
+	int k = strSize; //Writes to right
 
 	//For loop sets data to be string before setting its data to be tmp at the end
 	for (int i = 0; i <= max(strSize,dataSize); ++i) {
@@ -377,9 +379,9 @@ String& String::Replace(const String& find, const String& replace, bool replaceA
 	
 	String temp = data; //temp for new size of string after replace
 
-	delete[] data;
+	delete[] data; //Clear up memory in advance
 
-	data = new char[newArraySize + 1];
+	data = new char[newArraySize + 1]; //Sets data to new size
 
 	if (leftSize == SIZE_T_MAX) { //If find returns -1, aborts since -1 == not found
 		return *this;
@@ -408,7 +410,6 @@ String& String::Replace(const String& find, const String& replace, bool replaceA
 			}
 			i++;
 		}
-
 		if (data[newArraySize] != '\0') { //if last char of data != '\0', sets to that to avoid mem leaks 
 			data[newArraySize] = '\0';
 		}
@@ -472,7 +473,6 @@ String& String::Print(char modifier)
 		return *this;
 		break;
 
-		
 	default: //just returns data with no mods if the modifier param != valid mod
 		cout << data;
 		return *this;
