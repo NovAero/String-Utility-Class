@@ -4,6 +4,8 @@
 #include <cstring> //for cstring funcs
 #include <algorithm> // for max() func
 
+using namespace std;
+
 #define SIZE_T_MAX ((size_t)-1)
 #define MAX_CHAR_LENGTH 256
 

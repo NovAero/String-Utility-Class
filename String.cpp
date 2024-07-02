@@ -129,11 +129,13 @@ const char& String::operator[](const size_t index) const
 
 ostream& strio::operator<<(ostream& out, const String output)
 {
+	out << output;
 	return out;
 }
 
 istream& strio::operator>>(istream& in, const String input)
 {
+	in >> input;
 	return in;
 }
 
