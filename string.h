@@ -1,5 +1,8 @@
 #pragma once
-#include<map>
+#include <iostream> //for in/out functionality, cout and cin
+#include <stdexcept> //to throw error codes
+#include <cstring> //for cstring funcs
+#include <algorithm> // for max() func
 
 #define SIZE_T_MAX ((size_t)-1)
 #define MAX_CHAR_LENGTH 256
@@ -18,7 +21,7 @@ public: // Constructors //
 	String(const String& copy);
 
 	~String();
-
+	
 public: // Overrides //
 
 	bool operator==(const String& other);
@@ -85,3 +88,9 @@ private:
 	char* data;
 
 };
+
+namespace strio{ // namespace when using i/o streams overloads
+	//I/O operator overloads, for iostream and fstream usage
+	ostream& operator<<(ostream& out, const String output);
+	istream& operator>>(istream& in, const String input);
+}

@@ -1,10 +1,6 @@
 #include "String.h"
-#include <stdexcept>
-#include <iostream>
-#include <cstring>
-#include <algorithm>
 
-using namespace std;
+using namespace strio;
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -14,10 +10,8 @@ using namespace std;
 
 String::String()
 {
-
 	data = new char[1];
 	data[0] = '\0';
-
 }
 
 String::String(const char ch) 
@@ -27,30 +21,22 @@ String::String(const char ch)
 
 String::String(const char* str)
 {	
-
 	SetData(str);
-
 }
 
 String::String(String& copy)
 {
-
 	SetData(copy.GetData());
-
 }
 
 String::String(const String& copy)
 {
-	
 	SetData(const_cast<char*>(copy.GetData()));
-
 }
 
 String::~String()
 {
-
 	delete data;
-
 }
 
 
@@ -139,6 +125,16 @@ const char& String::operator[](const size_t index) const
 	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
 	//Otherwise returns contents of data at index
 	return data[index];
+}
+
+ostream& strio::operator<<(ostream& out, const String output)
+{
+	return out;
+}
+
+istream& strio::operator>>(istream& in, const String input)
+{
+	return in;
 }
 
 
