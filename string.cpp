@@ -1,11 +1,6 @@
 #include "String.h"
-#include <stdexcept>
-#include <iostream>
-#include <cstring>
-#include <map>
-#include <algorithm>
 
-using namespace std;
+using namespace strio;
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,10 +10,8 @@ using namespace std;
 
 String::String()
 {
-
 	data = new char[1];
 	data[0] = '\0';
-
 }
 
 String::String(const char ch) 
@@ -28,30 +21,22 @@ String::String(const char ch)
 
 String::String(const char* str)
 {	
-
 	SetData(str);
-
 }
 
 String::String(String& copy)
 {
-
 	SetData(copy.GetData());
-
 }
 
 String::String(const String& copy)
 {
-	
 	SetData(const_cast<char*>(copy.GetData()));
-
 }
 
 String::~String()
 {
-
 	delete data;
-
 }
 
 
@@ -140,6 +125,18 @@ const char& String::operator[](const size_t index) const
 	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
 	//Otherwise returns contents of data at index
 	return data[index];
+}
+
+ostream& strio::operator<<(ostream& out, const String output)
+{
+	out << output;
+	return out;
+}
+
+istream& strio::operator>>(istream& in, const String input)
+{
+	in >> input;
+	return in;
 }
 
 
@@ -386,33 +383,32 @@ String& String::Replace(const String& find, const String& replace, bool replaceA
 	if (leftSize == SIZE_T_MAX) { //If find returns -1, aborts since -1 == not found
 		return *this;
 	}
-	else {
-		int i = 0; //Iterator
+	
+	int i = 0; //Iterator
 
-		int l = 0; //left iterator
-		int m = leftSize; //middle iterator (substring replace)
-		int rtmp = leftSize + sizeFind; //right iterator 
-		int r = leftSize + sizeReplace; //right iterator
+	int l = 0; //left iterator
+	int m = leftSize; //middle iterator (substring replace)
+	int rtmp = leftSize + sizeFind; //right iterator 
+	int r = leftSize + sizeReplace; //right iterator
 
-		while (i < max(sizeReplace, max(leftSize,rightSize))) { //while i is less than the biggest size to write
-			if (l < leftSize) { //and while i < left chunk of string
-				data[i] = temp[i];
-				l++;
-			}
-			if (m < leftSize + sizeReplace && replace[i] != '\0') { //m is middle of data
-				data[m] = replace[i];
-				m++;
-			}
-			if (r < newArraySize) { //puts the right side of data back together 
-				data[r] = temp[rtmp];
-				r++;
-				rtmp++;
-			}
-			i++;
+	while (i < max(sizeReplace, max(leftSize,rightSize))) { //while i is less than the biggest size to write
+		if (l < leftSize) { //and while i < left chunk of string
+			data[i] = temp[i];
+			l++;
 		}
-		if (data[newArraySize] != '\0') { //if last char of data != '\0', sets to that to avoid mem leaks 
-			data[newArraySize] = '\0';
+		if (m < leftSize + sizeReplace && replace[i] != '\0') { //m is middle of data
+			data[m] = replace[i];
+			m++;
 		}
+		if (r < newArraySize) { //puts the right side of data back together 
+			data[r] = temp[rtmp];
+			r++;
+			rtmp++;
+		}
+		i++;
+	}
+	if (data[newArraySize] != '\0') { //if last char of data != '\0', sets to that to avoid mem leaks 
+		data[newArraySize] = '\0';
 	}
 	if (replaceAll == true) { //If replaceAll is set to false, it only replaces the first instance
 		if (Find(find) != SIZE_T_MAX) { //Checks if the substring find exists in next instance

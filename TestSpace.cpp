@@ -24,12 +24,12 @@ int main() {
 	String find = "elephant";
 	String replace = "dog";	
 
-	int index = 2;
-
 	cout << "Testing: len (Length)\n";
 	TestLen(text);
 	cout << "Testing: CharAt\n";
-	TestCharAt(text, index);
+	TestCharAt(text, 3);
+	TestCharAt(text, 5);
+	TestCharAt(text, 100);
 	cout << "Testing: IsEqual\n";
 	TestIsEqual(text, find);
 	TestIsEqual(_text, find);
@@ -56,11 +56,18 @@ int main() {
 
 void TestLen(String text)
 {
-	cout << text.GetData() << " is : " << text.len() << " characters long. \n \n";
+	cout << '\"' << text.GetData() << "\" is: " << text.len() << " characters long. \n \n";
 }
 
 void TestCharAt(String text, int index)
 {
+
+	if (index > text.len()) {
+		cout << index << " is out of bounds! \n";
+		cout << "Even though the index is longer, it wont return anything outside the bounds! \n";
+		cout << "Setting the index to 0 so test can continue\n";
+		index = 0;
+	}
 	char c = text.CharAt(index);
 	cout << "The character at Index " << index << " (character " << index+1 << ") of " << text.GetData() << " is: " << c << "\n \n";
 }
@@ -141,7 +148,7 @@ void TestReplaceAll(String text, String find, String replace)
 
 void TestInput(String text)
 {
-	cout << "Type any length of characters [MAX 255]" << '\n';
+	cout << "Type two words of any amount of char [Total must be less than 255]" << '\n';
 	text.Input();
 	cout << "You said: " << text.GetData() << "\n \n";
 
