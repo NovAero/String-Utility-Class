@@ -43,6 +43,7 @@ int main() {
 	cout << "Testing Print(tab): " << TestPrint(text, 't').GetData() << endl;
 	cout << "Testing Print(Prefixed space): " << TestPrint(text, 'p').GetData() << endl;
 	cout << "Testing Print(Suffixed space): " << TestPrint(text, 's').GetData() << endl;
+	system("pause");
 }
 
 String TestLen(String text)
@@ -155,7 +156,27 @@ String TestReplaceAll(String text)
 
 String TestInput(String text)
 { 
-	return  "";
+	//Cant test user input, testing for file I filled in
+	char* temp = new char[strlen("elephant dog") + 1];
+
+	fstream file;
+	file.open("inputTest.txt", std::ios::in);
+	if (!file.is_open()) {
+		return "Failure";
+	}
+	file.getline(temp, sizeof(file));
+
+	file.close();
+
+	if (temp[strlen("elephant dog")] != '\0') {
+		temp[strlen("elephant dog")] = '\0';
+	}
+	text.SetData(temp);
+
+	if (text.Find("elephant dog") != 0) {
+		return "Failure";
+	}
+	return "Success";
 }
 
 String TestPrint(String text, char mod)
@@ -194,7 +215,7 @@ String TestPrint(String text, char mod)
 			break;
 
 		default: //just returns data with no mods if the modifier param != valid mod
-			if (ptr != text) {
+			if (ptr.Find("elephant dog bird rat elephant") != 0) {
 				return "Failure";
 			}
 			return "Success";

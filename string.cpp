@@ -1,8 +1,5 @@
 #include "String.h"
 
-using namespace strio;
-
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 						 // Constructors / Deconstructor //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,18 +124,6 @@ const char& String::operator[](const size_t index) const
 	return data[index];
 }
 
-ostream& strio::operator<<(ostream& out, const String output)
-{
-	out << output;
-	return out;
-}
-
-istream& strio::operator>>(istream& in, const String input)
-{
-	in >> input;
-	return in;
-}
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                   // Functions //
@@ -234,8 +219,8 @@ String& String::Suffix(const String& str)
 	String tmp = new char[dataSize + 1];
 	tmp.SetData(data);
 
-	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')
-	delete[] data;
+	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')\
+
 	data = new char[newStrSize + 1];
 
 	int j = 0;
@@ -271,7 +256,6 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 	String tmp = new char[dataSize + 1];
 	tmp.SetData(data);
 
-	delete[] data;
 	data = new char[newStrSize + 1];
 
 	//Iterators for simultaneous writing of data[index]
@@ -450,27 +434,22 @@ String& String::Print(char modifier)
 	switch (mod) {
 
 	case 'n': //returns data with a new line after
-		cout << data << endl;
-		return *this;
+		return Suffix('\n');
 		break;
 
 	case 't': //returns data with a tab after it
-		cout << data << "\t";
-		return *this;
+		return Suffix('\t');
 		break;
 
 	case 'p': //returns data with a space before (p stands for prefix)
-		cout << " " << data;
-		return *this;
+		return Prefix(" ");
 		break;
 
 	case's': //returns data with a space after (s stands for suffix)
-		cout << data << " ";
-		return *this;
+		return Suffix(" ");
 		break;
 
 	default: //just returns data with no mods if the modifier param != valid mod
-		cout << data;
 		return *this;
 	} 
 }
