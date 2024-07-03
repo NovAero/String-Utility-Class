@@ -90,9 +90,3 @@ private:
 	char* data;
 
 };
-
-namespace strio{ // namespace when using i/o streams overloads
-	//I/O operator overloads, for iostream and fstream usage
-	ostream& operator<<(ostream& out, const String output);
-	istream& operator>>(istream& in, const String input);
-}

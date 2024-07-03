@@ -1,174 +1,202 @@
 #include <iostream>
+#include <fstream>
 #include "String.h"
 
 using namespace std;
 
-void TestLen(String text);
-void TestCharAt(String text, int index);
-void TestIsEqual(String lhs, String rhs);
-void TestToLower(String TEXT);
-void TestToUpper(String text);
-void TestSuffix(String text, String suffix);
-void TestPrefix(String text, String prefix);
-void TestFind(String find, String text);
-void TestReplaceFirst(String text, String find, String replace);
-void TestReplaceAll(String text, String find, String replace);
-void TestInput(String text);
-void TestPrint(String text);
-void TestPrintMod(String text);
+String TestLen(String text);
+String TestCharAt(String text);
+String TestIsEqual(String text);
+String TestToLower();
+String TestToUpper();
+String TestSuffix(String text);
+String TestPrefix(String text);
+String TestFind(String text);
+String TestReplaceFirst(String text);
+String TestReplaceAll(String text);
+String TestInput(String text);
+String TestPrint(String text, char mod);
 
 int main() {
 
 	String text = "elephant dog bird rat elephant";
-	String _text = "ELEphAnt";
+
 	String find = "elephant";
 	String replace = "dog";	
 
-	cout << "Testing: len (Length)\n";
-	TestLen(text);
-	cout << "Testing: CharAt\n";
-	TestCharAt(text, 3);
-	TestCharAt(text, 5);
-	TestCharAt(text, 100);
-	cout << "Testing: IsEqual\n";
-	TestIsEqual(text, find);
-	TestIsEqual(_text, find);
-	TestIsEqual(find, find);
-	cout << "Testing: ToLower\n";
-	TestToLower(_text);
-	cout << "Testing: ToUpper\n";
-	TestToUpper(_text);
-	cout << "Testing: Suffix (Append)\n";
-	TestSuffix(text, find);
-	cout << "Testing: Prefix (Prepend)\n";
-	TestPrefix(text, replace);
-	cout << "Testing: Find\n";
-	TestFind(find, text);
-	cout << "Testing: Replace\n";
-	TestReplaceFirst(text, find, replace);
-	TestReplaceAll (text, find, replace);
-	cout << "Testing: Input\n";
-	TestInput(text);
-	cout << "Testing: Print\n";
-	TestPrint(text);
-	TestPrintMod(text);
+	cout << "Test Text: " << text.GetData() << '\n';
+	cout << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
+
+	cout << "Testing len(): " << TestLen(text).GetData() << endl;
+	cout << "Testing CharAt(): " << TestCharAt(text).GetData() << endl;
+	cout << "Testing IsEqual(): " << TestIsEqual(text).GetData() << endl;
+	cout << "Testing ToLower(): " << TestToLower().GetData() << endl;
+	cout << "Testing ToUpper(): " << TestToUpper().GetData() << endl;
+	cout << "Testing Suffix(): " << TestSuffix(text).GetData() << endl;
+	cout << "Testing Prefix(): " << TestPrefix(text).GetData() << endl;
+	cout << "Testing Find(): " << TestFind(text).GetData() << endl;
+	cout << "Testing Replace(First): " << TestReplaceFirst(text).GetData() << endl;
+	cout << "Testing Replace(All): " << TestReplaceAll(text).GetData() << endl;
+	cout << "Testing Input(): " << TestInput(text).GetData() << endl;
+	cout << "Testing Print(): " << TestPrint(text, ' ').GetData() << endl;
+	cout << "Testing Print(newline): " << TestPrint(text, 'n').GetData() << endl;
+	cout << "Testing Print(tab): " << TestPrint(text, 't').GetData() << endl;
+	cout << "Testing Print(Prefixed space): " << TestPrint(text, 'p').GetData() << endl;
+	cout << "Testing Print(Suffixed space): " << TestPrint(text, 's').GetData() << endl;
 }
 
-void TestLen(String text)
+String TestLen(String text)
 {
-	cout << '\"' << text.GetData() << "\" is: " << text.len() << " characters long. \n \n";
-}
-
-void TestCharAt(String text, int index)
-{
-
-	if (index > text.len()) {
-		cout << index << " is out of bounds! \n";
-		cout << "Even though the index is longer, it wont return anything outside the bounds! \n";
-		cout << "Setting the index to 0 so test can continue\n";
-		index = 0;
+	if(text.len() != 30) {
+		return "Failure";
 	}
-	char c = text.CharAt(index);
-	cout << "The character at Index " << index << " (character " << index+1 << ") of " << text.GetData() << " is: " << c << "\n \n";
+	return "Success";
 }
 
-void TestIsEqual(String lhs, String rhs)
+String TestCharAt(String text)
 {
-	bool equality = lhs.IsEqual(rhs);
-	String print;
-
-	if (equality == true) {
-		print = "the same!";
+	if (text.CharAt(3) != 'p') {
+		return "Failure";
 	}
-	else {
-		print = "different";
+	return "Success";
+}
+
+String TestIsEqual(String text)
+{
+	if (text.IsEqual("elephant dog bird rat elephant") != true) {
+		return "Failure";
 	}
-
-	cout << lhs.GetData() << " and " << rhs.GetData() << " are " << print.GetData() << "\n \n";
-
-}
-
-void TestToLower(String TEXT)
-{
-	cout << TEXT.GetData() << " to lowercase! ~ ";
-	TEXT.ToLower();
-	cout << TEXT.GetData() << "\n \n";
+	return "Success";
 
 }
 
-void TestToUpper(String text)
+String TestToLower()
 {
-	cout << text.GetData() << " to uppercase! ~ ";
+	String text = "elepHaNt dog bIRd raT elePhanT";
+	text.ToLower();
+	if (text.IsEqual("elephant dog bird rat elephant") == false) {
+		return "Failure";
+	}
+	return "Success";
+}
+
+String TestToUpper()
+{
+	String text = "elepHaNt dog bIRd raT elePhanT";
 	text.ToUpper();
-	cout << text.GetData() << "\n \n";
-}
-
-void TestSuffix(String text, String suffix)
-{
-	cout << text.GetData() << " is the first word, add \"" << suffix.GetData() << "\" to the end: \n";
-	text.Suffix(suffix);
-	cout << text.GetData() << "\n \n";
-
-}
-
-void TestPrefix(String text, String prefix)
-{
-	cout << text.GetData() << " is the first word, add \"" << prefix.GetData() << "\" infront: \n";
-	text.Prefix(prefix);
-	cout << text.GetData() << "\n \n";
-}
-
-void TestFind(String find, String text)
-{
-	int index = text.Find(find);
-
-	if (index == -1) {
-		cout << "\"" << find.GetData() << "\" is not in \"" << text.GetData() << "\"\n \n";
+	if (text.IsEqual("ELEPHANT DOG BIRD RAT ELEPHANT") == false) {
+		return "Failure";
 	}
-	else {
-		cout << "\"" << find.GetData() << "\" was found at index: " << index << " of \"" << text.GetData() << "\"\n \n";
+	return "Success";
+}
+
+String TestSuffix(String text)
+{
+	String sText = text;
+	sText.Suffix("bird");
+
+	if (sText.len() != text.len() + strlen("bird")) {
+		return "Failure";
 	}
+	else if (sText.Find("elephant dog bird rat elephantbird") != 0) {
+		return "Failure";
+	}
+	return "Success";
 }
 
-void TestReplaceFirst(String text, String find, String replace)
+String TestPrefix(String text)
 {
-	cout << "Finding: \"" << find.GetData() << "\" in \"" << text.GetData() << "\", to replace the first with: \"" << replace.GetData() << "\"\n";
-	text.Replace(find, replace);
-	cout << "New text is: " << text.GetData() << "\n \n";
+	String pText = text;
+	pText.Prefix("bird");
 
+	if (pText.len() != text.len() + strlen("bird")) {
+		return "Failure";
+	}
+	if (pText.Find("birdelephant") != 0) {
+		return "Failure";
+	}
+	return "Success";
 }
 
-void TestReplaceAll(String text, String find, String replace)
+String TestFind(String text)
 {
-	cout << "Finding \"" << find.GetData() << "\" in \"" << text.GetData() << "\", to replace all with: \"" << replace.GetData() << "\"\n";
-	text.Replace(find, replace, true);
-	cout << "New text is: " << text.GetData() << "\n \n";
-
+	String find = "elephant";
+	if (text.Find(10,find) != 22) {
+		return "Failure";
+	}
+	return "Success";
 }
 
-void TestInput(String text)
+String TestReplaceFirst(String text)
 {
-	cout << "Type two words of any amount of char [Total must be less than 255]" << '\n';
-	text.Input();
-	cout << "You said: " << text.GetData() << "\n \n";
+	String find = "elephant";
+	String replace = "dog";
+	String temp = text;
+	temp.Replace(find, replace);
 
+	if (temp.Find("dog dog bird rat elephant") != 0) {
+		return "Failure";
+	}
+	return "Success";
 }
 
-void TestPrint(String text)
+String TestReplaceAll(String text)
 {
-	cout << "Printing: \"" << text.GetData() << "\": to the console by itself:\n";
-	text.Print();
-	cout << "printed with bad formatting :( \n\n";
+	String find = "elephant";
+	String replace = "dog";
+	String temp = text;
+	temp.Replace(find, replace, true);
+
+	if (temp.Find("dog dog bird rat dog") != 0) {
+		return "Failure";
+	}
+	return "Success";
 }
 
-void TestPrintMod(String text)
+String TestInput(String text)
+{ 
+	return  "";
+}
+
+String TestPrint(String text, char mod)
 {
-	cout << "Printing: " << text.GetData() << " to the console with a newline(n), tab(t), space before(p), and space after(s)!\n";
-	text.Print('n');
-	text.Print('t');
-	cout << ";\n;";
-	text.Print('p');
-	cout << '\n';
-	text.Print('s');
-	cout << "; \n\n" ;
+	int eotIndex = text.len();
+	String ptr = text.Print(mod);
+
+
+	switch (mod) {
+
+		case 'n': //returns data with a new line after
+			if (ptr[eotIndex] != '\n') {
+				return "Failure";
+			} 
+			return "Success";
+			break;
+		case 't': //returns data with a tab after it
+			if (ptr[eotIndex] != '\t') {
+				return "Failure";
+			}
+			return "Success";
+			break;
+
+		case 'p': //returns data with a space before (p stands for prefix)
+			if (ptr[0] != ' ') {
+				return "Failure";
+			}
+			return "Success";
+			break;
+
+		case's': //returns data with a space after (s stands for suffix)
+			if (ptr[eotIndex] != ' ') {
+				return "Failure";
+			}
+			return "Success";
+			break;
+
+		default: //just returns data with no mods if the modifier param != valid mod
+			if (ptr != text) {
+				return "Failure";
+			}
+			return "Success";
+	}
 }
