@@ -119,7 +119,7 @@ char& String::operator[](const size_t index)
 const char& String::operator[](const size_t index) const
 {
 	//Throw error if index is out of range
-	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
+	if (index >= len() || index < 0) { throw out_of_range("Out of range"); }
 	//Otherwise returns contents of data at index
 	return data[index];
 }
