@@ -33,7 +33,9 @@ String::String(const String& copy)
 
 String::~String()
 {
-	delete[] data;
+	if (data != nullptr) {
+		delete[] data;
+	}
 }
 
 
@@ -219,8 +221,8 @@ String& String::Suffix(const String& str)
 	String tmp = new char[dataSize + 1];
 	tmp.SetData(data);
 
-	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')\
-
+	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')
+	delete[] data;
 	data = new char[newStrSize + 1];
 
 	int j = 0;
@@ -241,7 +243,7 @@ String& String::Suffix(const String& str)
 	//For loop to set data at size greater than original string to new suffix contents
 	
 	//Checks if data has overrrun, and sets the end of data to be '\0'
-	if (this[newStrSize] != '\0') {
+	if (data[newStrSize] != '\0') {
 		data[newStrSize] = '\0';
 	}
 	return *this;
@@ -272,7 +274,6 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 			data[k] = tmp[i];
 			k++;
 		}
-		
 	}
 	//Checks if data has overrrun, and sets the end of data to be '\0'
 	if (data[newStrSize] != '\0') {
@@ -291,7 +292,7 @@ const char* String::Cstr() const
 String& String::ToLower()
 {//Uses ASCII values to clamp ranges for casechanges - see private variables in string.h
 
-	for (int i = 0; i < *GetData(); ++i) {
+	for (int i = 0; i < len(); ++i) {
 		if (data[i] >= capBnds[0] && data[i] <= capBnds[1]) {
 			data[i] += asciiOffset;
 		}
@@ -302,7 +303,7 @@ String& String::ToLower()
 String& String::ToUpper()
 {//Uses ASCII values to clamp ranges for casechanges - see private variables in string.h
 
-	for (int i = 0; i < *GetData(); ++i) {
+	for (int i = 0; i < len(); ++i) {
 		if (data[i] >= lwrBnds[0] && data[i] <= lwrBnds[1]) {
 			data[i] -= asciiOffset;
 		}

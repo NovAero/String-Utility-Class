@@ -16,39 +16,35 @@ const char* TestReplaceFirst();
 const char* TestReplaceAll();
 const char* TestInput();
 const char* TestPrint(char mod);
+void TestHandler();
 
 int main() {
-
-	cout << "Test Text: " << "elephant dog bird rat elephant" << '\n';
-	cout << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
-
-	cout << "Testing len(): " << TestLen()<< endl;
-	cout << "Testing CharAt(): " << TestCharAt() << endl;
-	cout << "Testing IsEqual(): " << TestIsEqual() << endl;
-	cout << "Testing ToLower(): " << TestToLower() << endl;
-	cout << "Testing ToUpper(): " << TestToUpper() << endl;
-	cout << "Testing Suffix(): " << TestSuffix() << endl;
-	cout << "Testing Prefix(): " << TestPrefix() << endl;
-	cout << "Testing Find(): " << TestFind() << endl;
-	cout << "Testing Replace(First): " << TestReplaceFirst() << endl;
-	cout << "Testing Replace(All): " << TestReplaceAll() << endl;
-	cout << "Testing Input(): " << TestInput() << endl;
-	cout << "Testing Print(): " << TestPrint(' ') << endl;
-	cout << "Testing Print(newline): " << TestPrint('n') << endl;
-	cout << "Testing Print(tab): " << TestPrint('t') << endl;
-	cout << "Testing Print(Prefixed space): " << TestPrint('p')<< endl;
-	cout << "Testing Print(Suffixed space): " << TestPrint('s')<< endl << endl;
 	
-	system("pause");
+	for (int i = 0; i <= 5000; i++) {
+		cout << "iteration " << i << endl;
+		TestLen();
+		TestCharAt();
+		TestIsEqual();
+		TestToLower();
+		TestToUpper();
+		TestSuffix();
+		TestPrefix();
+		TestFind();
+		TestReplaceFirst();
+		TestReplaceAll();
+		TestPrint(' ');
+	}
+	TestInput();
+
 }
 
 const char* TestLen()
 {
 	String text = "elephant dog bird rat elephant";
-	if(text.len() != 30) {
-		return "Failure";
+	if(text.len() == 30) {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 }
 
 const char* TestCharAt()
@@ -130,7 +126,7 @@ const char* TestReplaceFirst()
 
 	text.Replace(find, replace);
 
-	if (text.Find("dog dog bird rat elephant") == 0) {
+	if (text == "dog dog bird rat elephant") {
 		return "Success";
 	}
 	return "Failure";
@@ -144,7 +140,7 @@ const char* TestReplaceAll()
 
 	text.Replace(find, replace, true);
 
-	if (text.Find("dog dog bird rat dog") == 0) {
+	if (text == "dog dog bird rat dog") {
 		return "Success";
 	}
 	return "Failure";
@@ -210,4 +206,34 @@ const char* TestPrint(char mod)
 			return "Failure";
 			break;
 	}
+}
+
+void TestHandler()
+{
+	fstream file;
+	file.open("StringUtilityTests.txt", std::ios::app);
+	if (!file.is_open()) {
+		cout << "File is open, cannot access";
+		return;
+	}
+	file << "Test Text: " << "elephant dog bird rat elephant" << '\n';
+	file << "Date: " << __DATE__ << " Time: " << __TIME__ << '\n';
+
+	file << "Testing len(): " << TestLen() << endl;
+	file << "Testing CharAt(): " << TestCharAt() << endl;
+	file << "Testing IsEqual(): " << TestIsEqual() << endl;
+	file << "Testing ToLower(): " << TestToLower() << endl;
+	file << "Testing ToUpper(): " << TestToUpper() << endl;
+	file << "Testing Suffix(): " << TestSuffix() << endl;
+	file << "Testing Prefix(): " << TestPrefix() << endl;
+	file << "Testing Find(): " << TestFind() << endl;
+	file << "Testing Replace(First): " << TestReplaceFirst() << endl;
+	file << "Testing Replace(All): " << TestReplaceAll() << endl;
+	file << "Testing Print(): " << TestPrint(' ') << endl;
+	file << "Testing Print(newline): " << TestPrint('n') << endl;
+	file << "Testing Print(tab): " << TestPrint('t') << endl;
+	file << "Testing Print(Prefixed space): " << TestPrint('p') << endl;
+	file << "Testing Print(Suffixed space): " << TestPrint('s') << endl << endl;
+
+	file.close();
 }
