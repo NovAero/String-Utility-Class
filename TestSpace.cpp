@@ -4,56 +4,45 @@
 
 using namespace std;
 
-String TestLen();
-String TestCharAt();
-String TestIsEqual();
-String TestToLower();
-String TestToUpper();
-String TestSuffix();
-String TestPrefix();
-String TestFind();
-String TestReplaceFirst();
-String TestReplaceAll();
-String TestInput();
-String TestPrint(char mod);
+const char* TestLen();
+const char* TestCharAt();
+const char* TestIsEqual();
+const char* TestToLower();
+const char* TestToUpper();
+const char* TestSuffix();
+const char* TestPrefix();
+const char* TestFind();
+const char* TestReplaceFirst();
+const char* TestReplaceAll();
+const char* TestInput();
+const char* TestPrint(char mod);
 
 int main() {
 
-	String find = "elephant";
-	String replace = "dog";	
+	cout << "Test Text: " << "elephant dog bird rat elephant" << '\n';
+	cout << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
 
-	fstream file;
-
-	file.open("StringUtilityTests.txt", std::ios::out | std::ios::app);
-	if (!file.is_open()) {
-		cout << "File is open. Aborting";
-		return 1;
-	}
-
-	file << "Test Text: " << "elephant dog bird rat elephant" << '\n';
-	file << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
-
-	file << "Testing len(): " << TestLen().GetData() << endl;
-	file << "Testing CharAt(): " << TestCharAt().GetData() << endl;
-	file << "Testing IsEqual(): " << TestIsEqual().GetData() << endl;
-	file << "Testing ToLower(): " << TestToLower().GetData() << endl;
-	file << "Testing ToUpper(): " << TestToUpper().GetData() << endl;
-	file << "Testing Suffix(): " << TestSuffix().GetData() << endl;
-	file << "Testing Prefix(): " << TestPrefix().GetData() << endl;
-	file << "Testing Find(): " << TestFind().GetData() << endl;
-	file << "Testing Replace(First): " << TestReplaceFirst().GetData() << endl;
-	file << "Testing Replace(All): " << TestReplaceAll().GetData() << endl;
-	file << "Testing Input(): " << TestInput().GetData() << endl;
-	file << "Testing Print(): " << TestPrint(' ').GetData() << endl;
-	file << "Testing Print(newline): " << TestPrint('n').GetData() << endl;
-	file << "Testing Print(tab): " << TestPrint('t').GetData() << endl;
-	file << "Testing Print(Prefixed space): " << TestPrint('p').GetData() << endl;
-	file << "Testing Print(Suffixed space): " << TestPrint('s').GetData() << endl << endl;
-
-	file.close();
+	cout << "Testing len(): " << TestLen()<< endl;
+	cout << "Testing CharAt(): " << TestCharAt() << endl;
+	cout << "Testing IsEqual(): " << TestIsEqual() << endl;
+	cout << "Testing ToLower(): " << TestToLower() << endl;
+	cout << "Testing ToUpper(): " << TestToUpper() << endl;
+	cout << "Testing Suffix(): " << TestSuffix() << endl;
+	cout << "Testing Prefix(): " << TestPrefix() << endl;
+	cout << "Testing Find(): " << TestFind() << endl;
+	cout << "Testing Replace(First): " << TestReplaceFirst() << endl;
+	cout << "Testing Replace(All): " << TestReplaceAll() << endl;
+	cout << "Testing Input(): " << TestInput() << endl;
+	cout << "Testing Print(): " << TestPrint(' ') << endl;
+	cout << "Testing Print(newline): " << TestPrint('n') << endl;
+	cout << "Testing Print(tab): " << TestPrint('t') << endl;
+	cout << "Testing Print(Prefixed space): " << TestPrint('p')<< endl;
+	cout << "Testing Print(Suffixed space): " << TestPrint('s')<< endl << endl;
+	
+	system("pause");
 }
 
-String TestLen()
+const char* TestLen()
 {
 	String text = "elephant dog bird rat elephant";
 	if(text.len() != 30) {
@@ -62,7 +51,7 @@ String TestLen()
 	return "Success";
 }
 
-String TestCharAt()
+const char* TestCharAt()
 {
 	String text = "elephant dog bird rat elephant";
 	if (text.CharAt(3) != 'p') {
@@ -71,37 +60,37 @@ String TestCharAt()
 	return "Success";
 }
 
-String TestIsEqual()
+const char* TestIsEqual()
 {
 	String text = "elephant dog bird rat elephant";
-	if (text.IsEqual("elephant dog bird rat elephant") != true) {
-		return "Failure";
+	if (text == "elephant dog bird rat elephant") {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 
 }
 
-String TestToLower()
+const char* TestToLower()
 {
-	String text = "elephant dog bird rat elephant";
+	String text = "elePHant dOg bird RAt elepHANt";
 	text.ToLower();
-	if (text.IsEqual("elephant dog bird rat elephant") == false) {
-		return "Failure";
+	if (text == "elephant dog bird rat elephant") {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 }
 
-String TestToUpper()
+const char* TestToUpper()
 {
 	String text = "elepHaNt dog bIRd raT elePhanT";
 	text.ToUpper();
-	if (text.IsEqual("ELEPHANT DOG BIRD RAT ELEPHANT") == false) {
-		return "Failure";
+	if (text == "ELEPHANT DOG BIRD RAT ELEPHANT") {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 }
 
-String TestSuffix()
+const char* TestSuffix()
 {
 	String text = "elephant dog bird rat elephant";
 	text.Suffix("bird");
@@ -112,7 +101,7 @@ String TestSuffix()
 	return "Failure";
 }
 
-String TestPrefix()
+const char* TestPrefix()
 {
 	String text = "elephant dog bird rat elephant";
 	text.Prefix("bird");
@@ -123,17 +112,17 @@ String TestPrefix()
 	return "Failure";
 }
 
-String TestFind()
+const char* TestFind()
 {
-	String text = "elephant dog bird rat elephant";
-	String find = "elephant";
-	if (text.Find(10,find) != 22) {
-		return "Failure";
+	String text = "elephant dog bird rat elephant";;
+
+	if (text.Find("elephant") == 0) {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 }
 
-String TestReplaceFirst()
+const char* TestReplaceFirst()
 {
 	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
@@ -141,13 +130,13 @@ String TestReplaceFirst()
 
 	text.Replace(find, replace);
 
-	if (text.Find("dog dog bird rat elephant") != 0) {
-		return "Failure";
+	if (text.Find("dog dog bird rat elephant") == 0) {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 }
 
-String TestReplaceAll()
+const char* TestReplaceAll()
 {
 	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
@@ -155,78 +144,70 @@ String TestReplaceAll()
 
 	text.Replace(find, replace, true);
 
-	if (text.Find("dog dog bird rat dog") != 0) {
-		return "Failure";
+	if (text.Find("dog dog bird rat dog") == 0) {
+		return "Success";
 	}
-	return "Success";
+	return "Failure";
 }
 
-String TestInput()
+const char* TestInput()
 { 
-	String text = "elephant dog bird rat elephant";
-	//Cant test user input, testing for file I filled in
-	char* temp = new char[text.len() + 1];
+	cout << "Please write: \"elephant\"";
+	String text;
 
-	fstream file;
-	file.open("inputTest.txt", std::ios::in);
-	if (!file.is_open()) {
-		return "Failure";
+	text.Input();
+
+	if (text == "elephant") {
+		return "Success";
 	}
-	file.getline(temp, sizeof(file));
-
-	file.close();
-
-	if (temp[text.len()] != '\0') {
-		temp[text.len()] = '\0';
-	}
-	text.SetData(temp);
-
-	if (text.Find("elephant dog bird rat elephant") != 0) {
-		return "Failure";
-	}
-	return "Success";
+	return "Failure";
 }
 
-String TestPrint(char mod)
+const char* TestPrint(char mod)
 {
 	String text = "elephant dog bird rat elephant";
 	int eotIndex = text.len();
 	String ptr = text.Print(mod);
 
-
 	switch (mod) {
 
 		case 'n': //returns data with a new line after
-			if (ptr[eotIndex] != '\n') {
-				return "Failure";
+			if (ptr[eotIndex] == '\n') {
+				return "Success";
+				break;
 			} 
-			return "Success";
+			return "Failure";
 			break;
 		case 't': //returns data with a tab after it
-			if (ptr[eotIndex] != '\t') {
-				return "Failure";
+			if (ptr[eotIndex] == '\t') {
+				return "Success";
+				break;
 			}
-			return "Success";
+			return "Failure";
 			break;
 
 		case 'p': //returns data with a space before (p stands for prefix)
-			if (ptr[0] != ' ') {
-				return "Failure";
+			if (ptr[0] == ' ') {
+				return "Success";
+				break;
 			}
-			return "Success";
+			return "Failure";
 			break;
 
 		case's': //returns data with a space after (s stands for suffix)
-			if (ptr[eotIndex] != ' ') {
-				return "Failure";
+			if (ptr[eotIndex] == ' ') {
+				return "Success";
+				break;
 			}
-			return "Success";
+			return "Failure";
 			break;
 
 		default: //just returns data with no mods if the modifier param != valid mod
-			if (ptr.Find("elephant dog bird rat elephant") != 0) {
-				return "Failure";
+			if (ptr == "elephant dog bird rat elephant") {
+				return "Success";
+				break;
 			}
-			return "Success";
+			return "Failure";
+			break;
 	}
 }

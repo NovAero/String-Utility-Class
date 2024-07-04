@@ -33,7 +33,7 @@ String::String(const String& copy)
 
 String::~String()
 {
-	delete data;
+	delete[] data;
 }
 
 
@@ -253,7 +253,7 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 	int dataSize = strlen(data);
 	int newStrSize = dataSize + strSize;
 
-	String tmp = new char[dataSize + 1];
+	String tmp;
 	tmp.SetData(data);
 
 	data = new char[newStrSize + 1];
@@ -275,7 +275,7 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 		
 	}
 	//Checks if data has overrrun, and sets the end of data to be '\0'
-	if (this[newStrSize] != '\0') {
+	if (data[newStrSize] != '\0') {
 		data[newStrSize] = '\0';
 	}
 
@@ -336,7 +336,7 @@ size_t String::Find(size_t startindex, const String& str)
 			}
 			continue;
 		} // Else //
-		i -= x - 1;
+		i -= x-1;
 		x = 0;
 	}
 	return SIZE_T_MAX; // == -1;
@@ -358,9 +358,8 @@ String& String::Replace(const String& find, const String& replace, bool replaceA
 	int leftSize = Find(find); //Finds index of substring 
 	int rightSize = strlen(data) - leftSize - sizeFind; //Right hand side of the string exluding the text to be removed
 	
-	String temp = data; //temp for new size of string after replace
-
-	delete[] data; //Clear up memory in advance
+	String temp; //temp for new size of string after replace
+	temp.SetData(data);
 
 	data = new char[newArraySize + 1]; //Sets data to new size
 
@@ -415,7 +414,6 @@ String& String::Input()
 
 	//Makes data fit the new string, and strlen(input) wont make it a 256 length,
 	//only length of the input + 1 for '\0'
-	data = new char[strlen(input) + 1];
 	SetData(input);
 
 	return *this;
