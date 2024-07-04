@@ -18,304 +18,159 @@ Testing Print(Prefixed space): Success
 Testing Print(Suffixed space): Success
 
 Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
-Date: Jul  4 2024 Time: 14:30:28
-Testing len(): Success
-Testing CharAt(): Success
-Testing IsEqual(): Success
-Testing ToLower(): Success
-Testing ToUpper(): Success
-Testing Suffix(): Success
-Testing Prefix(): Success
-Testing Find(): Success
-Testing Replace(First): Success
-Testing Replace(All): Success
-Testing Input(): Success
-Testing Print(): Success
-Testing Print(newline): Success
-Testing Print(tab): Success
-Testing Print(Prefixed space): Success
-Testing Print(Suffixed space): Success
-
-Test Text: elephant dog bird rat elephant
 Date: Jul  4 2024 Time: 15:07:18
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date: Jul  4 2024 Time: 15:46:31
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date: Jul  4 2024 Time: 15:47:16
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date: Jul  4 2024 Time: 16:31:41
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date: Jul  4 2024 Time: 16:34:03
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date: Jul  4 2024 Time: 16:34:03
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+
+Test Text: elephant dog bird rat elephant
+Date: Jul  4 2024 Time: 16:37:20
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date & Time: Thu Jul  4 16:49:12 2024
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date & Time: Thu Jul  4 16:52:32 2024
 Testing len(): Success
 Testing CharAt(): Success
 Testing IsEqual(): Success

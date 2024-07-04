@@ -33,7 +33,9 @@ String::String(const String& copy)
 
 String::~String()
 {
-	delete data;
+	if (data != nullptr) {
+		delete[] data;
+	}
 }
 
 
@@ -219,8 +221,8 @@ String& String::Suffix(const String& str)
 	String tmp = new char[dataSize + 1];
 	tmp.SetData(data);
 
-	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')\
-
+	//Once data has been copied, write new array size of newStrSize + 1 (for the '\0')
+	delete[] data;
 	data = new char[newStrSize + 1];
 
 	int j = 0;
@@ -241,7 +243,7 @@ String& String::Suffix(const String& str)
 	//For loop to set data at size greater than original string to new suffix contents
 	
 	//Checks if data has overrrun, and sets the end of data to be '\0'
-	if (this[newStrSize] != '\0') {
+	if (data[newStrSize] != '\0') {
 		data[newStrSize] = '\0';
 	}
 	return *this;
@@ -253,7 +255,7 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 	int dataSize = strlen(data);
 	int newStrSize = dataSize + strSize;
 
-	String tmp = new char[dataSize + 1];
+	String tmp;
 	tmp.SetData(data);
 
 	data = new char[newStrSize + 1];
@@ -272,10 +274,9 @@ String& String::Prefix(const String& str) //Renamed from Prepend()
 			data[k] = tmp[i];
 			k++;
 		}
-		
 	}
 	//Checks if data has overrrun, and sets the end of data to be '\0'
-	if (this[newStrSize] != '\0') {
+	if (data[newStrSize] != '\0') {
 		data[newStrSize] = '\0';
 	}
 
@@ -291,7 +292,7 @@ const char* String::Cstr() const
 String& String::ToLower()
 {//Uses ASCII values to clamp ranges for casechanges - see private variables in string.h
 
-	for (int i = 0; i < *GetData(); ++i) {
+	for (int i = 0; i < len(); ++i) {
 		if (data[i] >= capBnds[0] && data[i] <= capBnds[1]) {
 			data[i] += asciiOffset;
 		}
@@ -302,7 +303,7 @@ String& String::ToLower()
 String& String::ToUpper()
 {//Uses ASCII values to clamp ranges for casechanges - see private variables in string.h
 
-	for (int i = 0; i < *GetData(); ++i) {
+	for (int i = 0; i < len(); ++i) {
 		if (data[i] >= lwrBnds[0] && data[i] <= lwrBnds[1]) {
 			data[i] -= asciiOffset;
 		}
@@ -320,23 +321,23 @@ size_t String::Find(const String& str)
 size_t String::Find(size_t startindex, const String& str)
 {
 	//sets temp objects for readability and debug
-	String phrase = str;
+	/*String phrase = str;*/
 	String text = data;
 
 	int x = 0; //Iterator
 	int i = startindex; //Index in data to start from
 
 	while (i < text.len()) { //Runs until word is found || until end of text, excluding last char
-		if (text[i] == phrase[x]) { //If char is the same, check next
+		if (text[i] == str[x]) { //If char is the same, check next
 			x++;
 			i++;
 
-			if (x == phrase.len()) { //If x == phrase,len(), the string has been found and can exit
+			if (x == str.len()) { //If x == phrase,len(), the string has been found and can exit
 				return i - x; // i-x is index of phrase
 			}
 			continue;
 		} // Else //
-		i -= x - 1;
+		i -= x-1;
 		x = 0;
 	}
 	return SIZE_T_MAX; // == -1;
@@ -358,9 +359,8 @@ String& String::Replace(const String& find, const String& replace, bool replaceA
 	int leftSize = Find(find); //Finds index of substring 
 	int rightSize = strlen(data) - leftSize - sizeFind; //Right hand side of the string exluding the text to be removed
 	
-	String temp = data; //temp for new size of string after replace
-
-	delete[] data; //Clear up memory in advance
+	String temp; //temp for new size of string after replace
+	temp.SetData(data);
 
 	data = new char[newArraySize + 1]; //Sets data to new size
 
@@ -415,7 +415,6 @@ String& String::Input()
 
 	//Makes data fit the new string, and strlen(input) wont make it a 256 length,
 	//only length of the input + 1 for '\0'
-	data = new char[strlen(input) + 1];
 	SetData(input);
 
 	return *this;

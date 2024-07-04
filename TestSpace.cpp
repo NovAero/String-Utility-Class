@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "String.h"
+#include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -18,24 +20,16 @@ const char* TestInput();
 const char* TestPrint(char mod);
 void TestHandler();
 
+char tmBuff[30];
+
 int main() {
 	
-	for (int i = 0; i <= 5000; i++) {
-		cout << "iteration " << i << endl;
-		TestLen();
-		TestCharAt();
-		TestIsEqual();
-		TestToLower();
-		TestToUpper();
-		TestSuffix();
-		TestPrefix();
-		TestFind();
-		TestReplaceFirst();
-		TestReplaceAll();
-		TestPrint(' ');
-	}
-	TestInput();
+	auto start = std::chrono::system_clock::now();
+	auto legacyStart = std::chrono::system_clock::to_time_t(start);
+	ctime_s(tmBuff, sizeof(tmBuff), &legacyStart);
 
+	TestHandler();
+	
 }
 
 const char* TestLen()
@@ -148,7 +142,7 @@ const char* TestReplaceAll()
 
 const char* TestInput()
 { 
-	cout << "Please write: \"elephant\"";
+	cout << "Please write: \"elephant\" \n";
 	String text;
 
 	text.Input();
@@ -217,8 +211,7 @@ void TestHandler()
 		return;
 	}
 	file << "Test Text: " << "elephant dog bird rat elephant" << '\n';
-	file << "Date: " << __DATE__ << " Time: " << __TIME__ << '\n';
-
+	file << "Date & Time: " << tmBuff;
 	file << "Testing len(): " << TestLen() << endl;
 	file << "Testing CharAt(): " << TestCharAt() << endl;
 	file << "Testing IsEqual(): " << TestIsEqual() << endl;
@@ -229,6 +222,7 @@ void TestHandler()
 	file << "Testing Find(): " << TestFind() << endl;
 	file << "Testing Replace(First): " << TestReplaceFirst() << endl;
 	file << "Testing Replace(All): " << TestReplaceAll() << endl;
+	file << "Testing Input(): " << TestInput() << endl;
 	file << "Testing Print(): " << TestPrint(' ') << endl;
 	file << "Testing Print(newline): " << TestPrint('n') << endl;
 	file << "Testing Print(tab): " << TestPrint('t') << endl;
