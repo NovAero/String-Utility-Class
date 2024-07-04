@@ -4,66 +4,67 @@
 
 using namespace std;
 
-String TestLen(String text);
-String TestCharAt(String text);
-String TestIsEqual(String text);
+String TestLen();
+String TestCharAt();
+String TestIsEqual();
 String TestToLower();
 String TestToUpper();
-String TestSuffix(String text);
-String TestPrefix(String text);
-String TestFind(String text);
-String TestReplaceFirst(String text);
-String TestReplaceAll(String text);
-String TestInput(String text);
-String TestPrint(String text, char mod);
+String TestSuffix();
+String TestPrefix();
+String TestFind();
+String TestReplaceFirst();
+String TestReplaceAll();
+String TestInput();
+String TestPrint(char mod);
 
 int main() {
-
-	String text = "elephant dog bird rat elephant";
 
 	String find = "elephant";
 	String replace = "dog";	
 
-	cout << "Test Text: " << text.GetData() << '\n';
+	cout << "Test Text: " << "elephant dog bird rat elephant" << '\n';
 	cout << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
 
-	cout << "Testing len(): " << TestLen(text).GetData() << endl;
-	cout << "Testing CharAt(): " << TestCharAt(text).GetData() << endl;
-	cout << "Testing IsEqual(): " << TestIsEqual(text).GetData() << endl;
+	cout << "Testing len(): " << TestLen().GetData() << endl;
+	cout << "Testing CharAt(): " << TestCharAt().GetData() << endl;
+	cout << "Testing IsEqual(): " << TestIsEqual().GetData() << endl;
 	cout << "Testing ToLower(): " << TestToLower().GetData() << endl;
 	cout << "Testing ToUpper(): " << TestToUpper().GetData() << endl;
-	cout << "Testing Suffix(): " << TestSuffix(text).GetData() << endl;
-	cout << "Testing Prefix(): " << TestPrefix(text).GetData() << endl;
-	cout << "Testing Find(): " << TestFind(text).GetData() << endl;
-	cout << "Testing Replace(First): " << TestReplaceFirst(text).GetData() << endl;
-	cout << "Testing Replace(All): " << TestReplaceAll(text).GetData() << endl;
-	cout << "Testing Input(): " << TestInput(text).GetData() << endl;
-	cout << "Testing Print(): " << TestPrint(text, ' ').GetData() << endl;
-	cout << "Testing Print(newline): " << TestPrint(text, 'n').GetData() << endl;
-	cout << "Testing Print(tab): " << TestPrint(text, 't').GetData() << endl;
-	cout << "Testing Print(Prefixed space): " << TestPrint(text, 'p').GetData() << endl;
-	cout << "Testing Print(Suffixed space): " << TestPrint(text, 's').GetData() << endl;
+	cout << "Testing Suffix(): " << TestSuffix().GetData() << endl;
+	cout << "Testing Prefix(): " << TestPrefix().GetData() << endl;
+	cout << "Testing Find(): " << TestFind().GetData() << endl;
+	cout << "Testing Replace(First): " << TestReplaceFirst().GetData() << endl;
+	cout << "Testing Replace(All): " << TestReplaceAll().GetData() << endl;
+	cout << "Testing Input(): " << TestInput().GetData() << endl;
+	cout << "Testing Print(): " << TestPrint(' ').GetData() << endl;
+	cout << "Testing Print(newline): " << TestPrint('n').GetData() << endl;
+	cout << "Testing Print(tab): " << TestPrint('t').GetData() << endl;
+	cout << "Testing Print(Prefixed space): " << TestPrint('p').GetData() << endl;
+	cout << "Testing Print(Suffixed space): " << TestPrint('s').GetData() << endl;
 	system("pause");
 }
 
-String TestLen(String text)
+String TestLen()
 {
+	String text = "elephant dog bird rat elephant";
 	if(text.len() != 30) {
 		return "Failure";
 	}
 	return "Success";
 }
 
-String TestCharAt(String text)
+String TestCharAt()
 {
+	String text = "elephant dog bird rat elephant";
 	if (text.CharAt(3) != 'p') {
 		return "Failure";
 	}
 	return "Success";
 }
 
-String TestIsEqual(String text)
+String TestIsEqual()
 {
+	String text = "elephant dog bird rat elephant";
 	if (text.IsEqual("elephant dog bird rat elephant") != true) {
 		return "Failure";
 	}
@@ -73,7 +74,7 @@ String TestIsEqual(String text)
 
 String TestToLower()
 {
-	String text = "elepHaNt dog bIRd raT elePhanT";
+	String text = "elephant dog bird rat elephant";
 	text.ToLower();
 	if (text.IsEqual("elephant dog bird rat elephant") == false) {
 		return "Failure";
@@ -91,8 +92,9 @@ String TestToUpper()
 	return "Success";
 }
 
-String TestSuffix(String text)
+String TestSuffix()
 {
+	String text = "elephant dog bird rat elephant";
 	String sText = text;
 	sText.Suffix("bird");
 
@@ -105,8 +107,9 @@ String TestSuffix(String text)
 	return "Success";
 }
 
-String TestPrefix(String text)
+String TestPrefix()
 {
+	String text = "elephant dog bird rat elephant";
 	String pText = text;
 	pText.Prefix("bird");
 
@@ -119,8 +122,9 @@ String TestPrefix(String text)
 	return "Success";
 }
 
-String TestFind(String text)
+String TestFind()
 {
+	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
 	if (text.Find(10,find) != 22) {
 		return "Failure";
@@ -128,8 +132,9 @@ String TestFind(String text)
 	return "Success";
 }
 
-String TestReplaceFirst(String text)
+String TestReplaceFirst()
 {
+	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
 	String replace = "dog";
 	String temp = text;
@@ -141,8 +146,9 @@ String TestReplaceFirst(String text)
 	return "Success";
 }
 
-String TestReplaceAll(String text)
+String TestReplaceAll()
 {
+	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
 	String replace = "dog";
 	String temp = text;
@@ -154,10 +160,11 @@ String TestReplaceAll(String text)
 	return "Success";
 }
 
-String TestInput(String text)
+String TestInput()
 { 
+	String text = "elephant dog bird rat elephant";
 	//Cant test user input, testing for file I filled in
-	char* temp = new char[strlen("elephant dog") + 1];
+	char* temp = new char[text.len() + 1];
 
 	fstream file;
 	file.open("inputTest.txt", std::ios::in);
@@ -168,19 +175,20 @@ String TestInput(String text)
 
 	file.close();
 
-	if (temp[strlen("elephant dog")] != '\0') {
-		temp[strlen("elephant dog")] = '\0';
+	if (temp[text.len()] != '\0') {
+		temp[text.len()] = '\0';
 	}
 	text.SetData(temp);
 
-	if (text.Find("elephant dog") != 0) {
+	if (text.Find("elephant dog bird rat elephant") != 0) {
 		return "Failure";
 	}
 	return "Success";
 }
 
-String TestPrint(String text, char mod)
+String TestPrint(char mod)
 {
+	String text = "elephant dog bird rat elephant";
 	int eotIndex = text.len();
 	String ptr = text.Print(mod);
 
