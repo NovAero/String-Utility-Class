@@ -22,26 +22,35 @@ int main() {
 	String find = "elephant";
 	String replace = "dog";	
 
-	cout << "Test Text: " << "elephant dog bird rat elephant" << '\n';
-	cout << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
+	fstream file;
 
-	cout << "Testing len(): " << TestLen().GetData() << endl;
-	cout << "Testing CharAt(): " << TestCharAt().GetData() << endl;
-	cout << "Testing IsEqual(): " << TestIsEqual().GetData() << endl;
-	cout << "Testing ToLower(): " << TestToLower().GetData() << endl;
-	cout << "Testing ToUpper(): " << TestToUpper().GetData() << endl;
-	cout << "Testing Suffix(): " << TestSuffix().GetData() << endl;
-	cout << "Testing Prefix(): " << TestPrefix().GetData() << endl;
-	cout << "Testing Find(): " << TestFind().GetData() << endl;
-	cout << "Testing Replace(First): " << TestReplaceFirst().GetData() << endl;
-	cout << "Testing Replace(All): " << TestReplaceAll().GetData() << endl;
-	cout << "Testing Input(): " << TestInput().GetData() << endl;
-	cout << "Testing Print(): " << TestPrint(' ').GetData() << endl;
-	cout << "Testing Print(newline): " << TestPrint('n').GetData() << endl;
-	cout << "Testing Print(tab): " << TestPrint('t').GetData() << endl;
-	cout << "Testing Print(Prefixed space): " << TestPrint('p').GetData() << endl;
-	cout << "Testing Print(Suffixed space): " << TestPrint('s').GetData() << endl;
-	system("pause");
+	file.open("StringUtilityTests.txt", std::ios::out | std::ios::app);
+	if (!file.is_open()) {
+		cout << "File is open. Aborting";
+		return 1;
+	}
+
+	file << "Test Text: " << "elephant dog bird rat elephant" << '\n';
+	file << "Date: " <<__DATE__ << " Time: " << __TIME__ << '\n';
+
+	file << "Testing len(): " << TestLen().GetData() << endl;
+	file << "Testing CharAt(): " << TestCharAt().GetData() << endl;
+	file << "Testing IsEqual(): " << TestIsEqual().GetData() << endl;
+	file << "Testing ToLower(): " << TestToLower().GetData() << endl;
+	file << "Testing ToUpper(): " << TestToUpper().GetData() << endl;
+	file << "Testing Suffix(): " << TestSuffix().GetData() << endl;
+	file << "Testing Prefix(): " << TestPrefix().GetData() << endl;
+	file << "Testing Find(): " << TestFind().GetData() << endl;
+	file << "Testing Replace(First): " << TestReplaceFirst().GetData() << endl;
+	file << "Testing Replace(All): " << TestReplaceAll().GetData() << endl;
+	file << "Testing Input(): " << TestInput().GetData() << endl;
+	file << "Testing Print(): " << TestPrint(' ').GetData() << endl;
+	file << "Testing Print(newline): " << TestPrint('n').GetData() << endl;
+	file << "Testing Print(tab): " << TestPrint('t').GetData() << endl;
+	file << "Testing Print(Prefixed space): " << TestPrint('p').GetData() << endl;
+	file << "Testing Print(Suffixed space): " << TestPrint('s').GetData() << endl << endl;
+
+	file.close();
 }
 
 String TestLen()
@@ -95,31 +104,23 @@ String TestToUpper()
 String TestSuffix()
 {
 	String text = "elephant dog bird rat elephant";
-	String sText = text;
-	sText.Suffix("bird");
+	text.Suffix("bird");
 
-	if (sText.len() != text.len() + strlen("bird")) {
-		return "Failure";
+	if (text == "elephant dog bird rat elephantbird") {
+		return "Success";
 	}
-	else if (sText.Find("elephant dog bird rat elephantbird") != 0) {
-		return "Failure";
-	}
-	return "Success";
+	return "Failure";
 }
 
 String TestPrefix()
 {
 	String text = "elephant dog bird rat elephant";
-	String pText = text;
-	pText.Prefix("bird");
+	text.Prefix("bird");
 
-	if (pText.len() != text.len() + strlen("bird")) {
-		return "Failure";
+	if (text == "birdelephant dog bird rat elephant") {
+		return "Success";
 	}
-	if (pText.Find("birdelephant") != 0) {
-		return "Failure";
-	}
-	return "Success";
+	return "Failure";
 }
 
 String TestFind()
@@ -137,10 +138,10 @@ String TestReplaceFirst()
 	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
 	String replace = "dog";
-	String temp = text;
-	temp.Replace(find, replace);
 
-	if (temp.Find("dog dog bird rat elephant") != 0) {
+	text.Replace(find, replace);
+
+	if (text.Find("dog dog bird rat elephant") != 0) {
 		return "Failure";
 	}
 	return "Success";
@@ -151,10 +152,10 @@ String TestReplaceAll()
 	String text = "elephant dog bird rat elephant";
 	String find = "elephant";
 	String replace = "dog";
-	String temp = text;
-	temp.Replace(find, replace, true);
 
-	if (temp.Find("dog dog bird rat dog") != 0) {
+	text.Replace(find, replace, true);
+
+	if (text.Find("dog dog bird rat dog") != 0) {
 		return "Failure";
 	}
 	return "Success";

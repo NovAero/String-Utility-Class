@@ -320,18 +320,18 @@ size_t String::Find(const String& str)
 size_t String::Find(size_t startindex, const String& str)
 {
 	//sets temp objects for readability and debug
-	String phrase = str;
+	/*String phrase = str;*/
 	String text = data;
 
 	int x = 0; //Iterator
 	int i = startindex; //Index in data to start from
 
 	while (i < text.len()) { //Runs until word is found || until end of text, excluding last char
-		if (text[i] == phrase[x]) { //If char is the same, check next
+		if (text[i] == str[x]) { //If char is the same, check next
 			x++;
 			i++;
 
-			if (x == phrase.len()) { //If x == phrase,len(), the string has been found and can exit
+			if (x == str.len()) { //If x == phrase,len(), the string has been found and can exit
 				return i - x; // i-x is index of phrase
 			}
 			continue;
