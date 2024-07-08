@@ -188,3 +188,41 @@ Testing Print(tab): Success
 Testing Print(Prefixed space): Success
 Testing Print(Suffixed space): Success
 
+Test Text: elephant dog bird rat elephant
+Date & Time: Fri Jul  5 09:54:00 2024
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
+Test Text: elephant dog bird rat elephant
+Date & Time: Fri Jul  5 09:54:48 2024
+Testing len(): Success
+Testing CharAt(): Success
+Testing IsEqual(): Success
+Testing ToLower(): Success
+Testing ToUpper(): Success
+Testing Suffix(): Success
+Testing Prefix(): Success
+Testing Find(): Success
+Testing Replace(First): Success
+Testing Replace(All): Success
+Testing Input(): Success
+Testing Print(): Success
+Testing Print(newline): Success
+Testing Print(tab): Success
+Testing Print(Prefixed space): Success
+Testing Print(Suffixed space): Success
+
