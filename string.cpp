@@ -31,6 +31,11 @@ String::String(const String& copy)
 	SetData(const_cast<char*>(copy.GetData()));
 }
 
+String::String(int number)
+{
+	SetData(IntToString(number));
+}
+
 String::~String()
 {
 	if (data != nullptr) {
@@ -65,20 +70,23 @@ bool String::operator<(const String& str)
 	String lhs = data;
 	String rhs = str;
 
+	int length = min(lhs.len(), rhs.len());
+
 	//Sets both to lowercase since A == 65 and a == 97 in ASCII table
 	rhs.ToLower();
 	lhs.ToLower();
 
-	while (orderFound == false) {
+	while (index < length) {
 		if (lhs[index] < rhs[index]) { //if LHS is smaller (earlier) than RHS
-			orderFound = true;
 			return true; //LHS comes first in alphabet
 		}
-		else { //Else they are the same, check next index
+		else if (lhs[index] == rhs[index]) { //Else they are the same, check next index
 			index++;
-		} //Else it is greater (later) in the alphabet
-		orderFound = true;	
-		return true; // 
+		}
+		else {
+			return false;
+		}
+		//Else it is greater (later) in the alphabet
 	} //If all indexes are checked returns false since they're the same order in alphabet
 	return false;
 }
@@ -164,6 +172,41 @@ void String::SetData(const char* toSet)
 	if (data[l - 1] != '\0') {
 		data[l] = '\0';
 	}
+}
+
+
+const char* String::IntToString(int num)
+{
+	int charlen = 0;
+	int iterator = 1;
+	int div = 10;
+
+	while (charlen == 0) {
+		if (num / div == 0) {
+			//Checks if num truncates to 0, meaning it is
+			//smaller than the divider's size (tens, hundreds, millions, etc)
+			charlen = iterator;
+			div /= 10;
+			break;
+		}
+		div *= 10; //multiplies by 10 to go to next digit size
+		iterator++; // iterator == digit size (3 = 100, 4 = 1000, 5 = 10,000 , etc)
+	}
+
+	//Sets temp to the size of the number + 1 for '\0' char
+	char* temp = new char[charlen + 1];
+
+	for (int i = 0; i < charlen; ++i) {
+		temp[i] = (num / div) + 48; //Sets temp[i] to the first number of num
+		num -= (num / div) * div; //removes the first place of num
+		div /= 10; //lowers div by factor of 10 (to the next digit place)
+	}
+
+	if (temp[charlen] != '\0') {
+		temp[charlen] = '\0';
+	}
+
+	return temp;
 }
 
 size_t String::len() const
@@ -391,8 +434,10 @@ String& String::Replace(const String& find, const String& replace, bool replaceA
 		}
 		i++;
 	}
-	if (data[newArraySize] != '\0') { //if last char of data != '\0', sets to that to avoid mem leaks 
-		data[newArraySize] = '\0';
+	if (data != nullptr) {
+		if (data[newArraySize] != '\0') { //if last char of data != '\0', sets to that to avoid mem leaks 
+			data[newArraySize] = '\0';
+		}
 	}
 	if (replaceAll == true) { //If replaceAll is set to false, it only replaces the first instance
 		if (Find(find) != SIZE_T_MAX) { //Checks if the substring find exists in next instance
