@@ -33,7 +33,9 @@ String::String(const String& copy)
 
 String::~String()
 {
-	delete data;
+	if (data != nullptr) {
+		delete data;
+	}
 }
 
 
@@ -63,20 +65,27 @@ bool String::operator<(const String& str)
 	String lhs = data;
 	String rhs = str;
 
+	int minLength = min(lhs.len(), rhs.len());
+
 	//Sets both to lowercase since A == 65 and a == 97 in ASCII table
 	rhs.ToLower();
 	lhs.ToLower();
 
-	while (orderFound == false) {
+	while (index <= minLength) {
 		if (lhs[index] < rhs[index]) { //if LHS is smaller (earlier) than RHS
 			orderFound = true;
 			return true; //LHS comes first in alphabet
 		}
-		else { //Else they are the same, check next index
+		else if (lhs[index] == rhs[index]){ //Else they are the same, check next index
 			index++;
-		} //Else it is greater (later) in the alphabet
-		orderFound = true;	
-		return true; // 
+			continue;
+		}
+		else {
+			orderFound = true;
+			return false; 
+		}
+		//Else it is greater (later) in the alphabet
+		
 	} //If all indexes are checked returns false since they're the same order in alphabet
 	return false;
 }
@@ -119,7 +128,7 @@ char& String::operator[](const size_t index)
 const char& String::operator[](const size_t index) const
 {
 	//Throw error if index is out of range
-	if (index >= sizeof(*this) || index < 0) { throw out_of_range("Out of range"); }
+	if (index >= len() || index < 0) { throw out_of_range("Out of range"); }
 	//Otherwise returns contents of data at index
 	return data[index];
 }
