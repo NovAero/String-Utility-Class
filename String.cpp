@@ -394,6 +394,10 @@ String& String::Replace(const String& find, const String& replace)
 String& String::Replace(const String& find, const String& replace, bool replaceAll)
 {	//Replaces string to find with replace, if replaceAll == false, replace only the first instance;
 
+	if (Find(find) == -1) { //If the string isnt found, exits and returns the unreplaced string
+		return *this;
+	}
+
 	int sizeReplace = replace.len(); //Size of substring replace
 	int sizeFind = find.len(); //Size of substring find
 	int diff = sizeReplace - sizeFind; //Difference between replace - find
