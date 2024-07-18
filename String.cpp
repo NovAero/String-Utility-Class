@@ -70,20 +70,23 @@ bool String::operator<(const String& str)
 	String lhs = data;
 	String rhs = str;
 
+	int length = min(lhs.len(), rhs.len());
+
 	//Sets both to lowercase since A == 65 and a == 97 in ASCII table
 	rhs.ToLower();
 	lhs.ToLower();
 
-	while (orderFound == false) {
+	while (index < length) {
 		if (lhs[index] < rhs[index]) { //if LHS is smaller (earlier) than RHS
-			orderFound = true;
 			return true; //LHS comes first in alphabet
 		}
-		else { //Else they are the same, check next index
+		else if (lhs[index] == rhs[index]) { //Else they are the same, check next index
 			index++;
-		} //Else it is greater (later) in the alphabet
-		orderFound = true;	
-		return true; // 
+		}
+		else {
+			return false;
+		}
+		//Else it is greater (later) in the alphabet
 	} //If all indexes are checked returns false since they're the same order in alphabet
 	return false;
 }
